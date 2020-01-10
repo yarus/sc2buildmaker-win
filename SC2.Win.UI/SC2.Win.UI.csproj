@@ -1,0 +1,162 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{E5BAA07C-79AB-437D-8DBA-4D69C0A810B3}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SC2.Win.UI</RootNamespace>
+    <AssemblyName>SC2.Win.UI</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AddBuildItemList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddBuildItemList.Designer.cs">
+      <DependentUpon>AddBuildItemList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BuildList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BuildList.Designer.cs">
+      <DependentUpon>BuildList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BuildListItemControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="BuildListItemControl.Designer.cs">
+      <DependentUpon>BuildListItemControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BuildMaker.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BuildMaker.Designer.cs">
+      <DependentUpon>BuildMaker.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BuildMakerApplicationContext.cs" />
+    <Compile Include="EditBuildInfoForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EditBuildInfoForm.Designer.cs">
+      <DependentUpon>EditBuildInfoForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormBase.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NewBuildForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NewBuildForm.Designer.cs">
+      <DependentUpon>NewBuildForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserControlBase.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControlBase.Designer.cs">
+      <DependentUpon>UserControlBase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WinFormViewFactory.cs" />
+    <EmbeddedResource Include="AddBuildItemList.resx">
+      <DependentUpon>AddBuildItemList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BuildList.resx">
+      <DependentUpon>BuildList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BuildListItemControl.resx">
+      <DependentUpon>BuildListItemControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BuildMaker.resx">
+      <DependentUpon>BuildMaker.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EditBuildInfoForm.resx">
+      <DependentUpon>EditBuildInfoForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NewBuildForm.resx">
+      <DependentUpon>NewBuildForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SC2.DataManagers\SC2.DataManagers.csproj">
+      <Project>{47A7D0B1-29E5-40EF-91A1-D435B29306F9}</Project>
+      <Name>SC2.DataManagers</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SC2.Entities\SC2.Entities.csproj">
+      <Project>{25474F00-277F-4C8F-A5F2-8DFA88C19ED5}</Project>
+      <Name>SC2.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SC2.UnitTests\SC2.UnitTests.csproj">
+      <Project>{21B3EDE4-7985-4ADE-9279-3B181A370350}</Project>
+      <Name>SC2.UnitTests</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SC2.Win.Presentation\SC2.Win.Presentation.csproj">
+      <Project>{D779C48A-1512-48FB-B2CA-4DF604F7745E}</Project>
+      <Name>SC2.Win.Presentation</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
