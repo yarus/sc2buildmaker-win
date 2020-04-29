@@ -3,3 +3,16 @@
 ################################################################################
 
 /.vs
+/packages
+/SC2.DataAccess/bin/Debug
+/SC2.DataAccess/obj/Debug
+/SC2.DataManagers/bin/Debug
+/SC2.DataManagers/obj/Debug
+/SC2.Entities/obj/Debug
+/SC2.PublicData/obj/Debug
+/SC2.UnitTests/bin/Debug
+/SC2.UnitTests/obj/Debug
+/SC2.Win.Presentation/bin/Debug
+/SC2.Win.Presentation/obj/Debug
+/SC2.Win.UI/bin/Debug
+/SC2.Win.UI/obj/Debug
