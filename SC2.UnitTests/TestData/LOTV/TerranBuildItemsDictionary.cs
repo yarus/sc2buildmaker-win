@@ -3391,17 +3391,15 @@ namespace SC2.UnitTests.TestData.LOTV
                     CostGas = 150,
                     ItemType = BuildItemTypeEnum.Upgrade,
                     BuildTimeInSeconds = 79,
-                    ProductionBuildingName = "TechLabOnStarport",
+                    ProductionBuildingName = "FusionCore",
                     DisplayName = "Advanced Ballistics"
                 };
 
                 item.OrderRequirements.Add(new StatLessThenValueRequirement("AdvancedBallistics", 1));
                 item.OrderRequirements.Add(new StatLessThenValueRequirement("AdvancedBallistics" + Consts.BuildItemOnBuildingPostfix, 1));
-                item.OrderRequirements.Add(new ItemExistsOrOnBuildingRequirement("FusionCore"));
 
                 item.ProduceRequirements.Add(new StatLessThenValueRequirement("AdvancedBallistics", 1));
                 item.ProduceRequirements.Add(new StatLessThenValueRequirement("AdvancedBallistics" + Consts.BuildItemOnBuildingPostfix, 1));
-                item.ProduceRequirements.Add(new StatBiggerOrEqualThenValueRequirement("FusionCore", 1));
 
                 return item;
             }
