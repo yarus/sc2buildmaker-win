@@ -9,7 +9,19 @@ https://youtu.be/Y4cYK_L-Q1k
 (The video was recorder for outdated version but it still allows to see how the app works).
 
 ***
+
 sc2buildmaker-Win - is .NET 4.5 C# codebase which I used to implement Starcraft2 economy model simulator. It also contains simple WinForms application which has similar functionality to SC2BuildMaker android app - it allows to create build orders. I also used this app to  generate SC2BuildMaker version config file which contains all required infromation regarding each unit/building/upgrade and build requirements for each item.
+
+The major purpose of this codebase is to generate new SC2BuildMaker version configuration file to implement adjustments from the recent patch (like unit/building/upgrade costs and requirements). In addition to that this codebase contains simple WinForms application which allows to work with build orders.
+
+***
+
+Ideas for future improvements:
+1. Isolate build order engine into separate NuGet package to allow its reusage.
+2. Migrate codebase to .NET Core which would allow to implement mobile application using Xamarin - this will allow to publish the app to Apple Store.
+3. Implement visual version file configuration editor: currently you have to modify code in order to produce new SC2BuildMaker version file but it shouldn't be that hard to create WinForms/WPF/Xamarin application to do the same using UI.
+
+***
 
 SC2.Win.UI - .NET 4.5 C# WinForms application which I used to generate SC2BuildMaker version config files and to test build orders.
 
@@ -32,21 +44,19 @@ SC2.DataAccess - XML, Json serialization classes.
 SC2BuildMaker version configuration file is a core of both android and win applications. This file contains serialized data which define economy simulation settings for specific SC2 patch and all details regarding each build order item (aka unit, building, upgrade). This data includes build times, mineral/gas cost for each unit and requirements which has to be met in order to allow to add build item into the build order.
 
 ```csharp
-  [Serializable]
-	public class SC2VersionInfo
-	{
-		public string AddonID { get; set; }
-		public string VersionID { get; set; }
+[Serializable]
+public class SC2VersionInfo
+{
+  public string AddonID { get; set; }
+  public string VersionID { get; set; }
+  public GlobalConstantsInfo GlobalSettings { get; set; }
+  public List<RaceSettingsInfo> RaceSettingsList { get; set; }
 
-		public GlobalConstantsInfo GlobalSettings { get; set; }
-
-		public List<RaceSettingsInfo> RaceSettingsList { get; set; }
-
-		public SC2VersionInfo()
-		{
-			this.RaceSettingsList = new List<RaceSettingsInfo>();
-		}
-	}
+  public SC2VersionInfo()
+  {
+    this.RaceSettingsList = new List<RaceSettingsInfo>();
+  }
+}
 ```
 
 AddonID - WOL,HOTS,LOTV.
