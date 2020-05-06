@@ -13,4 +13,4 @@ sc2buildmaker-Win - is .NET 4.5 C# codebase which I used to implement Starcraft2
 
 SC2.Win.UI - .NET 4.5 C# WinForms application which I used to generate SC2BuildMaker version config files and to test build orders.
 
-![SC2.Win.UI Solution](readme-assets.png)
+![SC2.Win.UI Solution](readme-assets/SC2-Win-UI-Solution.png)
