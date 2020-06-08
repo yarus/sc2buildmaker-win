@@ -16,7 +16,7 @@ namespace SC2.Win.UI
             // Note: To run test workflow uncomment next line and comment CreateUiWorkflow() merthod call
             mUiWorkflow = CreateTestUiWorkflow();
             //mUiWorkflow = CreateUiWorkflow();
-            
+
             mUiWorkflow.CurrentViewChanged += MUiWorkflowCurrentViewChanged;
             mUiWorkflow.ShowMainForm();
         }
