@@ -1,92 +1,12 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <ProjectReference Include="..\SC2.Entities\SC2.Entities.csproj" />
+    <ProjectReference Include="..\SC2.DataManagers\SC2.DataManagers.csproj" />
+  </ItemGroup>
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{D779C48A-1512-48FB-B2CA-4DF604F7745E}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SC2.Win.Presentation</RootNamespace>
-    <AssemblyName>SC2.Win.Presentation</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
+    <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <ItemGroup>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="ImageProvider.cs" />
-    <Compile Include="IViewFactory.cs" />
-    <Compile Include="ModalViewResult.cs" />
-    <Compile Include="Presenter\AddBuildItemListPresenter.cs" />
-    <Compile Include="Presenter\BuildListItemControlPresenter.cs" />
-    <Compile Include="Presenter\BuildListPresenter.cs" />
-    <Compile Include="Presenter\BuildMakerPresenter.cs" />
-    <Compile Include="Presenter\EditBuildInfoPresenter.cs" />
-    <Compile Include="Presenter\IPresenter.cs" />
-    <Compile Include="Presenter\NewBuildPresenter.cs" />
-    <Compile Include="Presenter\PresenterBase.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UIWorkflow.cs" />
-    <Compile Include="ViewModel\BuildItemAddButtonViewModel.cs" />
-    <Compile Include="ViewModel\BuildMakerViewModel.cs" />
-    <Compile Include="ViewModel\BuildOrderItemViewModel.cs" />
-    <Compile Include="ViewModel\BuildOrderListItemViewModel.cs" />
-    <Compile Include="ViewModel\IViewModel.cs" />
-    <Compile Include="ViewModel\ViewModelBase.cs" />
-    <Compile Include="View\IAddBuildItemListView.cs" />
-    <Compile Include="View\IBuildListItemControlView.cs" />
-    <Compile Include="View\IBuildListView.cs" />
-    <Compile Include="View\IBuildMakerView.cs" />
-    <Compile Include="View\IEditBuidlInfoView.cs" />
-    <Compile Include="View\INewBuildView.cs" />
-    <Compile Include="View\IView.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\SC2.DataManagers\SC2.DataManagers.csproj">
-      <Project>{47A7D0B1-29E5-40EF-91A1-D435B29306F9}</Project>
-      <Name>SC2.DataManagers</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SC2.Entities\SC2.Entities.csproj">
-      <Project>{25474F00-277F-4C8F-A5F2-8DFA88C19ED5}</Project>
-      <Name>SC2.Entities</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SC2.PublicData\SC2.PublicData.csproj">
-      <Project>{37894598-d099-4166-b4fb-873c637f5124}</Project>
-      <Name>SC2.PublicData</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
+
 </Project>
