@@ -13,7 +13,7 @@ namespace SC2.UnitTests.TestData.LOTV
 		public static SC2VersionEntity GetVersionEntity()
 		{
 			var result = new SC2VersionEntity();
-			result.VersionID = "4.11.3";
+			result.VersionID = "5.0.3";
 			result.AddonID = "LOTV";
 			result.GlobalConstants = GetGlobalConstants();
 			result.RaceSettingsDictionary = new RaceSettingsEntityDictionary();

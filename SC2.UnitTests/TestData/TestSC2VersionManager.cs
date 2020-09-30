@@ -22,7 +22,7 @@ namespace SC2.UnitTests.TestData
 				return TestDataFixture.GetVersionEntity();
 			}
 
-            if (versionID == "4.11.3")
+            if (versionID == "5.0.3")
 		    {
 		        return SC2.UnitTests.TestData.LOTV.TestDataFixture.GetVersionEntity();
 		    }
@@ -32,7 +32,7 @@ namespace SC2.UnitTests.TestData
 
 		public IEnumerable<string> GetSupportedVersionIDs()
 		{
-			return new[] { "4.11.3", "2.2.0", "2.0.5" };
+			return new[] { "5.0.3", "2.2.0", "2.0.5" };
 		}
 
 		public void SaveVersion(SC2VersionEntity verion)

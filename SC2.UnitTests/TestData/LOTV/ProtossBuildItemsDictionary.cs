@@ -116,6 +116,7 @@ namespace SC2.UnitTests.TestData.LOTV
 
             result.AddItem(GraviticBoosters);
             result.AddItem(GravitonCatapult);
+            result.AddItem(TectonicDestabilizers);
 
 			return result;
 		}
@@ -470,9 +471,9 @@ namespace SC2.UnitTests.TestData.LOTV
 				{
 					Name = "VoidRay",
 					CostGas = 150,
-					CostMinerals = 250,
+					CostMinerals = 200,
 					CostSupply = 4,
-					BuildTimeInSeconds = 43,
+					BuildTimeInSeconds = 37,
 					ProductionBuildingName = "Stargate",
 					ItemType = BuildItemTypeEnum.Unit
 				};
@@ -1913,11 +1914,36 @@ namespace SC2.UnitTests.TestData.LOTV
 			}
 		}
 
+        private static BuildItemEntity TectonicDestabilizers
+        {
+            get
+            {
+                var item = new BuildItemEntity
+                {
+                    Name = "TectonicDestabilizers",
+                    CostMinerals = 150,
+                    CostGas = 150,
+                    ItemType = BuildItemTypeEnum.Upgrade,
+                    BuildTimeInSeconds = 100,
+                    ProductionBuildingName = "FleetBeacon",
+                    DisplayName = "Tectonic Destabilizers"
+                };
+
+                item.OrderRequirements.Add(new StatLessThenValueRequirement("TectonicDestabilizers", 1));
+                item.OrderRequirements.Add(new StatLessThenValueRequirement("TectonicDestabilizers" + Consts.BuildItemOnBuildingPostfix, 1));
+
+                item.ProduceRequirements.Add(new StatLessThenValueRequirement("TectonicDestabilizers", 1));
+                item.ProduceRequirements.Add(new StatLessThenValueRequirement("TectonicDestabilizers" + Consts.BuildItemOnBuildingPostfix, 1));
+
+                return item;
+            }
+        }
+
         #endregion
 
         #region Specials
 
-	    private static BuildItemEntity Chronoboost
+        private static BuildItemEntity Chronoboost
 	    {
 	        get
 	        {

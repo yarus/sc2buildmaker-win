@@ -46,7 +46,7 @@ namespace SC2.Win.UI
             //var version = versionsManager.GetVersion("2.2.0", "HOTS");
             //versionsManager.SaveVersion(version);
 
-            var version3 = versionsManager.GetVersion("4.11.3");
+            var version3 = versionsManager.GetVersion("5.0.3");
             versionsManager.SaveVersion(version3);
 
             // Generate test builds files
