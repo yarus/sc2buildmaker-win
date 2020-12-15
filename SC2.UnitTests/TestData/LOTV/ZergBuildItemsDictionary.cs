@@ -25,6 +25,7 @@ namespace SC2.UnitTests.TestData.LOTV
             result.AddItem(ReturnDrone);
             result.AddItem(StartIdle);
 
+			result.AddItem(StopIdleIn1Second);
             result.AddItem(StopIdleIn3Seconds);
             result.AddItem(StopIdleIn5Seconds);
             result.AddItem(StopIdleIn10Seconds);
@@ -81,7 +82,7 @@ namespace SC2.UnitTests.TestData.LOTV
 		    
 		    result.AddItem(TunnelingClaws);
             result.AddItem(GlialReconstitution);
-			result.AddItem(MutateVentralSacs);
+			//result.AddItem(MutateVentralSacs);
 			result.AddItem(NeuralParasite);
 
 			result.AddItem(PathogenGlands);
@@ -105,10 +106,12 @@ namespace SC2.UnitTests.TestData.LOTV
             result.AddItem(FlyerCarapaceLevel3);
 
             result.AddItem(AdaptiveTalons);
+			result.AddItem(SeismicSpines);
 		    result.AddItem(MuscularAugments);
             result.AddItem(GroovedSpines);
             result.AddItem(ChitinousPlating);
             result.AddItem(AdrenalineGlands);
+			result.AddItem(AnabolicSynthesis);
 
 			return result;
 		}
@@ -262,7 +265,7 @@ namespace SC2.UnitTests.TestData.LOTV
 				};
 
 				item.OrderRequirements.Add(new ItemExistsOrOnBuildingRequirement(Consts.CoreStatistics.GasGayser));
-                item.ProduceRequirements.Add(new ItemExistsOrOnBuildingRequirement(Consts.CoreStatistics.GasGayser));
+				item.ProduceRequirements.Add(new StatBiggerOrEqualThenValueRequirement(Consts.CoreStatistics.GasGayser, 1));
 
 				item.OrderRequirements.Add(new ItemExistsOrOnBuildingRequirement("Drone"));
 				item.ProduceRequirements.Add(new StatBiggerOrEqualThenValueRequirement("Drone", 1));
@@ -382,16 +385,6 @@ namespace SC2.UnitTests.TestData.LOTV
 				item.OrderedActions.Add(new ChangeStatisticAction(Consts.CoreStatistics.WorkersOnMinerals, -1));
 				item.OrderedActions.Add(new ChangeStatisticAction(Consts.CoreStatistics.CurrentSupply, -1));
 
-                item.OrderedActions.Add(new ChangeStatisticAction("FreeHydraliskDenForLurkerDen" + Consts.BuildItemOnBuildingPostfix, 1));
-                item.OrderedActions.Add(new ChangeStatisticAction("FreeHydraliskDenForUpgrades" + Consts.BuildItemOnBuildingPostfix, 1));
-
-                item.ProducedActions.Add(new ChangeStatisticAction("FreeHydraliskDenForLurkerDen" + Consts.BuildItemOnBuildingPostfix, -1));
-                item.ProducedActions.Add(new ChangeStatisticAction("FreeHydraliskDenForLurkerDen", 1));
-
-                item.ProducedActions.Add(new ChangeStatisticAction("FreeHydraliskDenForUpgrades" + Consts.BuildItemOnBuildingPostfix, -1));
-                item.ProducedActions.Add(new ChangeStatisticAction("FreeHydraliskDenForUpgrades", 1));
-
-
 				return item;
 			}
 		}
@@ -413,10 +406,12 @@ namespace SC2.UnitTests.TestData.LOTV
 
 	            item.OrderRequirements.Add(new ItemExistsOrOnBuildingRequirement("Drone"));
 	            item.OrderRequirements.Add(new ItemExistsOrOnBuildingRequirement("Lair"));
-	            item.ProduceRequirements.Add(new StatBiggerOrEqualThenValueRequirement("Drone", 1));
+				item.OrderRequirements.Add(new ItemExistsOrOnBuildingRequirement("HydraliskDen"));
+				item.ProduceRequirements.Add(new StatBiggerOrEqualThenValueRequirement("Drone", 1));
 	            item.ProduceRequirements.Add(new StatBiggerOrEqualThenValueRequirement("Lair", 1));
+				item.ProduceRequirements.Add(new StatBiggerOrEqualThenValueRequirement("HydraliskDen", 1));
 
-	            item.OrderedActions.Add(new ChangeStatisticAction("Drone", -1));
+				item.OrderedActions.Add(new ChangeStatisticAction("Drone", -1));
 	            item.OrderedActions.Add(new ChangeStatisticAction(Consts.CoreStatistics.WorkersOnMinerals, -1));
 	            item.OrderedActions.Add(new ChangeStatisticAction(Consts.CoreStatistics.CurrentSupply, -1));
 
@@ -1216,7 +1211,30 @@ namespace SC2.UnitTests.TestData.LOTV
             }
         }
 
-        private static BuildItemEntity StopIdleIn3Seconds
+		private static BuildItemEntity StopIdleIn1Second
+		{
+			get
+			{
+				var item = new BuildItemEntity
+				{
+					Name = "StopIdleIn1Second",
+					ItemType = BuildItemTypeEnum.Special,
+					DisplayName = "Stop Idle in 1 second",
+					BuildTimeInSeconds = 0
+				};
+
+				item.OrderRequirements.Add(new ItemExistsOrOnBuildingRequirement(IdleModule.StartIdle));
+				item.ProduceRequirements.Add(new StatBiggerOrEqualThenValueRequirement(IdleModule.IdleTimer, 1));
+
+				item.OrderedActions.Add(new ChangeStatisticAction(IdleModule.StartIdle, -1));
+				item.OrderedActions.Add(new ChangeStatisticAction(IdleModule.StartIdle + Consts.BuildItemOnBuildingPostfix, -1));
+
+				return item;
+			}
+		}
+
+
+		private static BuildItemEntity StopIdleIn3Seconds
         {
             get
             {
@@ -1485,6 +1503,7 @@ namespace SC2.UnitTests.TestData.LOTV
 			}
 		}
 
+		/*
         private static BuildItemEntity MutateVentralSacs
         {
             get
@@ -1509,6 +1528,7 @@ namespace SC2.UnitTests.TestData.LOTV
                 return item;
             }
         }
+		*/
 
 		private static BuildItemEntity GroundCarapaceLevel1
 		{
@@ -1900,7 +1920,7 @@ namespace SC2.UnitTests.TestData.LOTV
                     CostGas = 225,
                     ItemType = BuildItemTypeEnum.Upgrade,
                     BuildTimeInSeconds = 136,
-                    ProductionBuildingName = "Spire",
+                    ProductionBuildingName = "FreeSpireForUpgrades",
                     DisplayName = "Flyer Carapace Level 2"
                 };
 
@@ -1933,7 +1953,7 @@ namespace SC2.UnitTests.TestData.LOTV
                     CostGas = 300,
                     ItemType = BuildItemTypeEnum.Upgrade,
                     BuildTimeInSeconds = 157,
-                    ProductionBuildingName = "Spire",
+                    ProductionBuildingName = "FreeSpireForUpgrades",
                     DisplayName = "Flyer Carapace Level 3"
                 };
 
@@ -1994,8 +2014,8 @@ namespace SC2.UnitTests.TestData.LOTV
 				var item = new BuildItemEntity
 				{
 					Name = "PneumatizedCarapace",
-					CostMinerals = 75,
-					CostGas = 75,
+					CostMinerals = 100,
+					CostGas = 100,
 					ItemType = BuildItemTypeEnum.Upgrade,
 					BuildTimeInSeconds = 43,
                     ProductionBuildingName = "FreeHatcheryForUpgrades",
@@ -2059,8 +2079,8 @@ namespace SC2.UnitTests.TestData.LOTV
 	            var item = new BuildItemEntity
 	            {
 	                Name = "TunnelingClaws",
-	                CostMinerals = 150,
-	                CostGas = 150,
+	                CostMinerals = 100,
+	                CostGas = 100,
 	                ItemType = BuildItemTypeEnum.Upgrade,
 	                BuildTimeInSeconds = 79,
 	                ProductionBuildingName = "RoachWarren",
@@ -2141,7 +2161,7 @@ namespace SC2.UnitTests.TestData.LOTV
 	                CostMinerals = 150,
 	                CostGas = 150,
 	                ItemType = BuildItemTypeEnum.Upgrade,
-	                BuildTimeInSeconds = 54,
+	                BuildTimeInSeconds = 57,
 	                ProductionBuildingName = "LurkerDen",
 	                DisplayName = "Adaptive Talons"
                 };
@@ -2158,7 +2178,33 @@ namespace SC2.UnitTests.TestData.LOTV
 	        }
 	    }
 
-        
+		private static BuildItemEntity SeismicSpines
+		{
+			get
+			{
+				var item = new BuildItemEntity
+				{
+					Name = "SeismicSpines",
+					CostMinerals = 150,
+					CostGas = 150,
+					ItemType = BuildItemTypeEnum.Upgrade,
+					BuildTimeInSeconds = 57,
+					ProductionBuildingName = "LurkerDen",
+					DisplayName = "Seismic Spines"
+				};
+
+				item.OrderRequirements.Add(new ItemExistsOrOnBuildingRequirement("Hive"));
+				item.OrderRequirements.Add(new StatLessThenValueRequirement("SeismicSpines", 1));
+				item.OrderRequirements.Add(new StatLessThenValueRequirement("SeismicSpines" + Consts.BuildItemOnBuildingPostfix, 1));
+
+				item.ProduceRequirements.Add(new StatBiggerOrEqualThenValueRequirement("Hive", 1));
+				item.ProduceRequirements.Add(new StatLessThenValueRequirement("SeismicSpines", 1));
+				item.ProduceRequirements.Add(new StatLessThenValueRequirement("SeismicSpines" + Consts.BuildItemOnBuildingPostfix, 1));
+
+				return item;
+			}
+		}
+
 		private static BuildItemEntity MuscularAugments
 		{
 			get
@@ -2170,7 +2216,7 @@ namespace SC2.UnitTests.TestData.LOTV
 					CostGas = 100,
 					ItemType = BuildItemTypeEnum.Upgrade,
 					BuildTimeInSeconds = 71,
-                    ProductionBuildingName = "FreeHydraliskDenForUpgrades",
+                    ProductionBuildingName = "HydraliskDen",
 					DisplayName = "Muscular Augments"
 				};
 
@@ -2181,13 +2227,6 @@ namespace SC2.UnitTests.TestData.LOTV
 				item.ProduceRequirements.Add(new StatBiggerOrEqualThenValueRequirement("Lair", 1));
 				item.ProduceRequirements.Add(new StatLessThenValueRequirement("MuscularAugments", 1));
 				item.ProduceRequirements.Add(new StatLessThenValueRequirement("MuscularAugments" + Consts.BuildItemOnBuildingPostfix, 1));
-
-                item.OrderedActions.Add(new ChangeStatisticAction("FreeHydraliskDenForLurkerDen", -1));
-                item.OrderedActions.Add(new ChangeStatisticAction("FreeHydraliskDenForLurkerDen" + Consts.BuildItemOnBuildingPostfix, 1));
-
-                item.ProducedActions.Add(new ChangeStatisticAction("FreeHydraliskDenForLurkerDen" + Consts.BuildItemOnBuildingPostfix, -1));
-                item.ProducedActions.Add(new ChangeStatisticAction("FreeHydraliskDenForLurkerDen", 1));
-
 
 				return item;
 			}
@@ -2204,7 +2243,7 @@ namespace SC2.UnitTests.TestData.LOTV
 					CostGas = 100,
 					ItemType = BuildItemTypeEnum.Upgrade,
 					BuildTimeInSeconds = 71,
-                    ProductionBuildingName = "FreeHydraliskDenForUpgrades",
+                    ProductionBuildingName = "HydraliskDen",
                     DisplayName = "Grooved Spines"
 				};
 
@@ -2215,13 +2254,6 @@ namespace SC2.UnitTests.TestData.LOTV
 				item.ProduceRequirements.Add(new StatBiggerOrEqualThenValueRequirement("Lair", 1));
                 item.ProduceRequirements.Add(new StatLessThenValueRequirement("GroovedSpines", 1));
                 item.ProduceRequirements.Add(new StatLessThenValueRequirement("GroovedSpines" + Consts.BuildItemOnBuildingPostfix, 1));
-
-                item.OrderedActions.Add(new ChangeStatisticAction("FreeHydraliskDenForLurkerDen", -1));
-                item.OrderedActions.Add(new ChangeStatisticAction("FreeHydraliskDenForLurkerDen" + Consts.BuildItemOnBuildingPostfix, 1));
-
-                item.ProducedActions.Add(new ChangeStatisticAction("FreeHydraliskDenForLurkerDen" + Consts.BuildItemOnBuildingPostfix, -1));
-                item.ProducedActions.Add(new ChangeStatisticAction("FreeHydraliskDenForLurkerDen", 1));
-
 
 				return item;
 			}
@@ -2351,6 +2383,33 @@ namespace SC2.UnitTests.TestData.LOTV
 				item.ProduceRequirements.Add(new StatBiggerOrEqualThenValueRequirement("Hive", 1));
 				item.ProduceRequirements.Add(new StatLessThenValueRequirement("ChitinousPlating", 1));
 				item.ProduceRequirements.Add(new StatLessThenValueRequirement("ChitinousPlating" + Consts.BuildItemOnBuildingPostfix, 1));
+
+				return item;
+			}
+		}
+
+		private static BuildItemEntity AnabolicSynthesis
+		{
+			get
+			{
+				var item = new BuildItemEntity
+				{
+					Name = "AnabolicSynthesis",
+					CostMinerals = 150,
+					CostGas = 150,
+					ItemType = BuildItemTypeEnum.Upgrade,
+					BuildTimeInSeconds = 43,
+					ProductionBuildingName = "UltraliskCavern",
+					DisplayName = "Anabolic Synthesis"
+				};
+
+				item.OrderRequirements.Add(new ItemExistsOrOnBuildingRequirement("Hive"));
+				item.OrderRequirements.Add(new StatLessThenValueRequirement("AnabolicSynthesis", 1));
+				item.OrderRequirements.Add(new StatLessThenValueRequirement("AnabolicSynthesis" + Consts.BuildItemOnBuildingPostfix, 1));
+
+				item.ProduceRequirements.Add(new StatBiggerOrEqualThenValueRequirement("Hive", 1));
+				item.ProduceRequirements.Add(new StatLessThenValueRequirement("AnabolicSynthesis", 1));
+				item.ProduceRequirements.Add(new StatLessThenValueRequirement("AnabolicSynthesis" + Consts.BuildItemOnBuildingPostfix, 1));
 
 				return item;
 			}

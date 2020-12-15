@@ -43,7 +43,8 @@ namespace SC2.UnitTests.TestData.LOTV
             result.AddItem(SalvageBunker);
 
             result.AddItem(StartIdle);
-            result.AddItem(StopIdleIn3Seconds);
+			result.AddItem(StopIdleIn1Second);
+			result.AddItem(StopIdleIn3Seconds);
             result.AddItem(StopIdleIn5Seconds);
             result.AddItem(StopIdleIn10Seconds);
 
@@ -1296,7 +1297,7 @@ namespace SC2.UnitTests.TestData.LOTV
 				};
 
 				refinery.OrderRequirements.Add(new ItemExistsOrOnBuildingRequirement(Consts.CoreStatistics.GasGayser));
-                refinery.ProduceRequirements.Add(new ItemExistsOrOnBuildingRequirement(Consts.CoreStatistics.GasGayser));
+				refinery.ProduceRequirements.Add(new StatBiggerOrEqualThenValueRequirement(Consts.CoreStatistics.GasGayser, 1));
 
 				refinery.OrderedActions.Add(new ChangeStatisticAction(Consts.CoreStatistics.GasGayser, -1));
 				refinery.OrderedActions.Add(new ChangeStatisticAction(Consts.CoreStatistics.WorkersOnMinerals, -1));
@@ -1948,7 +1949,29 @@ namespace SC2.UnitTests.TestData.LOTV
             }
         }
 
-        private static BuildItemEntity StopIdleIn3Seconds
+		private static BuildItemEntity StopIdleIn1Second
+		{
+			get
+			{
+				var item = new BuildItemEntity
+				{
+					Name = "StopIdleIn1Second",
+					ItemType = BuildItemTypeEnum.Special,
+					DisplayName = "Stop Idle in 1 second",
+					BuildTimeInSeconds = 0
+				};
+
+				item.OrderRequirements.Add(new ItemExistsOrOnBuildingRequirement(IdleModule.StartIdle));
+				item.ProduceRequirements.Add(new StatBiggerOrEqualThenValueRequirement(IdleModule.IdleTimer, 1));
+
+				item.OrderedActions.Add(new ChangeStatisticAction(IdleModule.StartIdle, -1));
+				item.OrderedActions.Add(new ChangeStatisticAction(IdleModule.StartIdle + Consts.BuildItemOnBuildingPostfix, -1));
+
+				return item;
+			}
+		}
+
+		private static BuildItemEntity StopIdleIn3Seconds
         {
             get
             {
@@ -2982,7 +3005,7 @@ namespace SC2.UnitTests.TestData.LOTV
 					CostMinerals = 100,
 					CostGas = 100,
 					ItemType = BuildItemTypeEnum.Upgrade,
-					BuildTimeInSeconds = 121,
+					BuildTimeInSeconds = 100,
 					ProductionBuildingName = "TechLabOnBarracks",
 					DisplayName = "Stim Pack"
 				};
@@ -3054,8 +3077,8 @@ namespace SC2.UnitTests.TestData.LOTV
 				var item = new BuildItemEntity
 				{
 					Name = "InfernalPreIgniter",
-					CostMinerals = 150,
-					CostGas = 150,
+					CostMinerals = 100,
+					CostGas = 100,
 					ItemType = BuildItemTypeEnum.Upgrade,
 					BuildTimeInSeconds = 79,
 					ProductionBuildingName = "TechLabOnFactory",
@@ -3208,8 +3231,8 @@ namespace SC2.UnitTests.TestData.LOTV
                 var item = new BuildItemEntity
                 {
                     Name = "HyperflightRotors",
-                    CostMinerals = 200,
-                    CostGas = 200,
+                    CostMinerals = 150,
+                    CostGas = 150,
                     ItemType = BuildItemTypeEnum.Upgrade,
                     BuildTimeInSeconds = 121,
                     ProductionBuildingName = "TechLabOnStarport",

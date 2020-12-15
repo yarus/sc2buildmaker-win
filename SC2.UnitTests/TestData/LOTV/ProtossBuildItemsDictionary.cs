@@ -26,6 +26,7 @@ namespace SC2.UnitTests.TestData.LOTV
 		    result.AddItem(MassRecall);
 
             result.AddItem(StartIdle);
+			result.AddItem(StopIdleIn1Second);
             result.AddItem(StopIdleIn3Seconds);
             result.AddItem(StopIdleIn5Seconds);
             result.AddItem(StopIdleIn10Seconds);
@@ -114,8 +115,9 @@ namespace SC2.UnitTests.TestData.LOTV
 			result.AddItem(ShieldsLevel3);
             result.AddItem(GraviticDrive);
 
-            result.AddItem(GraviticBoosters);
-            result.AddItem(GravitonCatapult);
+			result.AddItem(FluxVanes);
+			result.AddItem(GraviticBoosters);
+            //result.AddItem(GravitonCatapult);
             result.AddItem(TectonicDestabilizers);
 
 			return result;
@@ -563,17 +565,11 @@ namespace SC2.UnitTests.TestData.LOTV
 				item.OrderRequirements.Add(new ItemExistsOrOnBuildingRequirement("FleetBeacon"));
 				item.ProduceRequirements.Add(new StatBiggerOrEqualThenValueRequirement("FleetBeacon", 1));
 
-				item.OrderRequirements.Add(new ItemExistsOrOnBuildingRequirement("MothershipCore"));
-				item.ProduceRequirements.Add(new StatBiggerOrEqualThenValueRequirement("MothershipCore", 1));
-
 				item.OrderRequirements.Add(new StatLessThenValueRequirement("Mothership", 1));
 				item.OrderRequirements.Add(new StatLessThenValueRequirement("Mothership" + Consts.BuildItemOnBuildingPostfix, 1));
 
 				item.ProduceRequirements.Add(new StatLessThenValueRequirement("Mothership", 1));
 				item.ProduceRequirements.Add(new StatLessThenValueRequirement("Mothership" + Consts.BuildItemOnBuildingPostfix, 1));
-
-				item.OrderedActions.Add(new ChangeStatisticAction("MothershipCore", -1));
-				item.OrderedActions.Add(new ChangeStatisticAction(Consts.CoreStatistics.CurrentSupply, -2));
 
 				return item;
 			}
@@ -942,7 +938,7 @@ namespace SC2.UnitTests.TestData.LOTV
 				};
 
 				refinery.OrderRequirements.Add(new ItemExistsOrOnBuildingRequirement(Consts.CoreStatistics.GasGayser));
-                refinery.ProduceRequirements.Add(new ItemExistsOrOnBuildingRequirement(Consts.CoreStatistics.GasGayser));
+				refinery.ProduceRequirements.Add(new StatBiggerOrEqualThenValueRequirement(Consts.CoreStatistics.GasGayser, 1));
 
 				refinery.OrderedActions.Add(new ChangeStatisticAction(Consts.CoreStatistics.GasGayser, -1));
 
@@ -1424,6 +1420,7 @@ namespace SC2.UnitTests.TestData.LOTV
 			}
 		}
 
+		/*
 		private static BuildItemEntity GravitonCatapult
 		{
 			get
@@ -1448,6 +1445,7 @@ namespace SC2.UnitTests.TestData.LOTV
 				return item;
 			}
 		}
+		*/
 
         private static BuildItemEntity AnionPulseCrystals
         {
@@ -1484,7 +1482,7 @@ namespace SC2.UnitTests.TestData.LOTV
                     CostMinerals = 100,
                     CostGas = 100,
                     ItemType = BuildItemTypeEnum.Upgrade,
-                    BuildTimeInSeconds = 121,
+                    BuildTimeInSeconds = 100,
                     ProductionBuildingName = "DarkShrine",
                     DisplayName = "Shadow Stride"
                 };
@@ -1939,11 +1937,36 @@ namespace SC2.UnitTests.TestData.LOTV
             }
         }
 
-        #endregion
+		private static BuildItemEntity FluxVanes
+		{
+			get
+			{
+				var item = new BuildItemEntity
+				{
+					Name = "FluxVanes",
+					CostMinerals = 100,
+					CostGas = 100,
+					ItemType = BuildItemTypeEnum.Upgrade,
+					BuildTimeInSeconds = 57,
+					ProductionBuildingName = "FleetBeacon",
+					DisplayName = "Flux Vanes"
+				};
 
-        #region Specials
+				item.OrderRequirements.Add(new StatLessThenValueRequirement("FluxVanes", 1));
+				item.OrderRequirements.Add(new StatLessThenValueRequirement("FluxVanes" + Consts.BuildItemOnBuildingPostfix, 1));
 
-        private static BuildItemEntity Chronoboost
+				item.ProduceRequirements.Add(new StatLessThenValueRequirement("FluxVanes", 1));
+				item.ProduceRequirements.Add(new StatLessThenValueRequirement("FluxVanes" + Consts.BuildItemOnBuildingPostfix, 1));
+
+				return item;
+			}
+		}
+
+		#endregion
+
+		#region Specials
+
+		private static BuildItemEntity Chronoboost
 	    {
 	        get
 	        {
@@ -2179,7 +2202,29 @@ namespace SC2.UnitTests.TestData.LOTV
             }
         }
 
-        private static BuildItemEntity StopIdleIn3Seconds
+		private static BuildItemEntity StopIdleIn1Second
+		{
+			get
+			{
+				var item = new BuildItemEntity
+				{
+					Name = "StopIdleIn1Second",
+					ItemType = BuildItemTypeEnum.Special,
+					DisplayName = "Stop Idle in 1 second",
+					BuildTimeInSeconds = 0
+				};
+
+				item.OrderRequirements.Add(new ItemExistsOrOnBuildingRequirement(IdleModule.StartIdle));
+				item.ProduceRequirements.Add(new StatBiggerOrEqualThenValueRequirement(IdleModule.IdleTimer, 1));
+
+				item.OrderedActions.Add(new ChangeStatisticAction(IdleModule.StartIdle, -1));
+				item.OrderedActions.Add(new ChangeStatisticAction(IdleModule.StartIdle + Consts.BuildItemOnBuildingPostfix, -1));
+
+				return item;
+			}
+		}
+
+		private static BuildItemEntity StopIdleIn3Seconds
         {
             get
             {
