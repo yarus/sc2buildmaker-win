@@ -22,7 +22,12 @@ namespace SC2.UnitTests.TestData.LOTV
             result.AddItem(MineralScv);
             result.AddItem(GoOutScv);
 
-            result.AddItem(LiftRaxFromReactor);
+			result.AddItem(ScannerSweep);
+			result.AddItem(ReturnScv);
+			result.AddItem(CallSupplyDrop);
+			result.AddItem(SalvageBunker);
+
+			result.AddItem(LiftRaxFromReactor);
             result.AddItem(LiftRaxFromTechLab);
             result.AddItem(LandRaxOnReactor);
             result.AddItem(LandRaxOnTechLab);
@@ -36,12 +41,7 @@ namespace SC2.UnitTests.TestData.LOTV
             result.AddItem(LiftStarportFromTechLab);
             result.AddItem(LandStarportOnReactor);
             result.AddItem(LandStarportOnTechLab);
-
-            result.AddItem(ScannerSweep);
-            result.AddItem(ReturnScv);
-            result.AddItem(CallSupplyDrop);
-            result.AddItem(SalvageBunker);
-
+            
             result.AddItem(StartIdle);
 			result.AddItem(StopIdleIn1Second);
 			result.AddItem(StopIdleIn3Seconds);
@@ -200,6 +200,7 @@ namespace SC2.UnitTests.TestData.LOTV
 				defaultItem.OrderedActions.Add(new ChangeStatisticAction("MaximumSupply", 15));
 				defaultItem.OrderedActions.Add(new ChangeStatisticAction("BasesCount", 1));
 				defaultItem.OrderedActions.Add(new ChangeStatisticAction("CommandCenter", 1));
+				defaultItem.OrderedActions.Add(new ChangeStatisticAction("FreeCommandCenterForUpgrade", 1));
 				defaultItem.OrderedActions.Add(new ChangeStatisticAction("Minerals", 50));
 				defaultItem.OrderedActions.Add(new ChangeStatisticAction("MaximumSupplyLimit", 200));
 				defaultItem.OrderedActions.Add(new ChangeStatisticAction("WorkersOnMinerals" + Consts.BuildItemOnBuildingPostfix, 12));
@@ -1128,7 +1129,11 @@ namespace SC2.UnitTests.TestData.LOTV
                 cc.ProducedActions.Add(new ChangeStatisticAction(Consts.CoreStatistics.GasGayser + Consts.BuildItemOnBuildingPostfix, -2));
                 cc.ProducedActions.Add(new ChangeStatisticAction(Consts.CoreStatistics.GasGayser, 2));
 
-                return cc;
+				cc.OrderedActions.Add(new ChangeStatisticAction("FreeCommandCenterForUpgrade" + Consts.BuildItemOnBuildingPostfix, 1));
+				cc.ProducedActions.Add(new ChangeStatisticAction("FreeCommandCenterForUpgrade" + Consts.BuildItemOnBuildingPostfix, -1));
+				cc.ProducedActions.Add(new ChangeStatisticAction("FreeCommandCenterForUpgrade", 1));
+
+				return cc;
             }
         }
 
@@ -1150,19 +1155,29 @@ namespace SC2.UnitTests.TestData.LOTV
 
                 oc.OrderRequirements.Add(new ItemExistsOrOnBuildingRequirement("Barracks"));
 
-                oc.OrderRequirements.Add(new StatsAdditionIsBiggerThenStatsAdditionRequirement(
+				oc.OrderRequirements.Add(new ItemExistsOrOnBuildingRequirement("FreeCommandCenterForUpgrade"));
+
+				/*
+				oc.OrderRequirements.Add(new StatsAdditionIsBiggerThenStatsAdditionRequirement(
                     new List<string> { "CommandCenter", ("CommandCenter" + Consts.BuildItemOnBuildingPostfix) },
                     new List<string> { "UpgradedCC", ("UpgradedCC" + Consts.BuildItemOnBuildingPostfix) }));
+				*/
 
                 oc.ProduceRequirements.Add(new StatBiggerOrEqualThenValueRequirement("Barracks", 1));
-                oc.ProduceRequirements.Add(new StatLessThenStatRequirement("UpgradedCC", "CommandCenter"));
+				oc.ProduceRequirements.Add(new StatBiggerOrEqualThenValueRequirement("FreeCommandCenterForUpgrade", 1));
+
+				oc.OrderedActions.Add(new ChangeStatisticAction("FreeCommandCenterForUpgrade", -1));
+
+				/*
+				oc.ProduceRequirements.Add(new StatLessThenStatRequirement("UpgradedCC", "CommandCenter"));
 
                 oc.OrderedActions.Add(new ChangeStatisticAction("UpgradedCC" + Consts.BuildItemOnBuildingPostfix, 1));
 
                 oc.ProducedActions.Add(new ChangeStatisticAction("UpgradedCC" + Consts.BuildItemOnBuildingPostfix, -1));
                 oc.ProducedActions.Add(new ChangeStatisticAction("UpgradedCC", 1));
+				*/
 
-                return oc;
+				return oc;
             }
         }
 
@@ -1184,18 +1199,24 @@ namespace SC2.UnitTests.TestData.LOTV
 
 
                 pf.OrderRequirements.Add(new ItemExistsOrOnBuildingRequirement("EngineeringBay"));
+				pf.OrderRequirements.Add(new ItemExistsOrOnBuildingRequirement("FreeCommandCenterForUpgrade"));
 
-                pf.OrderRequirements.Add(new StatsAdditionIsBiggerThenStatsAdditionRequirement(
+				/*
+				pf.OrderRequirements.Add(new StatsAdditionIsBiggerThenStatsAdditionRequirement(
                     new List<string> { "CommandCenter", ("CommandCenter" + Consts.BuildItemOnBuildingPostfix) },
                     new List<string> { "UpgradedCC", ("UpgradedCC" + Consts.BuildItemOnBuildingPostfix) }));
-
+				*/
                 pf.ProduceRequirements.Add(new StatBiggerOrEqualThenValueRequirement("EngineeringBay", 1));
-                pf.ProduceRequirements.Add(new StatLessThenStatRequirement("UpgradedCC", "CommandCenter"));
+				pf.ProduceRequirements.Add(new StatBiggerOrEqualThenValueRequirement("FreeCommandCenterForUpgrade", 1));
+				//pf.ProduceRequirements.Add(new StatLessThenStatRequirement("UpgradedCC", "CommandCenter"));
 
-                pf.OrderedActions.Add(new ChangeStatisticAction("UpgradedCC" + Consts.BuildItemOnBuildingPostfix, 1));
+				pf.OrderedActions.Add(new ChangeStatisticAction("FreeCommandCenterForUpgrade", -1));
+				/*
+				pf.OrderedActions.Add(new ChangeStatisticAction("UpgradedCC" + Consts.BuildItemOnBuildingPostfix, 1));
 
                 pf.ProducedActions.Add(new ChangeStatisticAction("UpgradedCC" + Consts.BuildItemOnBuildingPostfix, -1));
                 pf.ProducedActions.Add(new ChangeStatisticAction("UpgradedCC", 1));
+				*/
 
                 return pf;
             }
@@ -1219,10 +1240,14 @@ namespace SC2.UnitTests.TestData.LOTV
 				barracks.ProduceRequirements.Add(new StatBiggerOrEqualThenValueRequirement("SupplyDepot", 1));
 
 				barracks.OrderedActions.Add(new ChangeStatisticAction(Consts.CoreStatistics.WorkersOnMinerals, -1));
-				barracks.OrderedActions.Add(new ChangeStatisticAction(Consts.CoreStatistics.WorkersOnWalk, 1));
+				barracks.OrderedActions.Add(new ChangeStatisticAction(Consts.CoreStatistics.WorkersOnWalk, 1));				
 
 				barracks.ProducedActions.Add(new ChangeStatisticAction(Consts.CoreStatistics.WorkersOnMinerals, 1));
 				barracks.ProducedActions.Add(new ChangeStatisticAction(Consts.CoreStatistics.WorkersOnWalk, -1));
+
+				barracks.OrderedActions.Add(new ChangeStatisticAction("FreeBarracksForAddon" + Consts.BuildItemOnBuildingPostfix, 1));
+				barracks.ProducedActions.Add(new ChangeStatisticAction("FreeBarracksForAddon" + Consts.BuildItemOnBuildingPostfix, -1));
+				barracks.ProducedActions.Add(new ChangeStatisticAction("FreeBarracksForAddon", 1));
 
 				return barracks;
 			}
@@ -1278,6 +1303,10 @@ namespace SC2.UnitTests.TestData.LOTV
 				item.ProducedActions.Add(new ChangeStatisticAction(Consts.CoreStatistics.WorkersOnMinerals, 1));
 				item.ProducedActions.Add(new ChangeStatisticAction(Consts.CoreStatistics.WorkersOnWalk, -1));
 
+				item.OrderedActions.Add(new ChangeStatisticAction("FreeFactoryForAddon" + Consts.BuildItemOnBuildingPostfix, 1));
+				item.ProducedActions.Add(new ChangeStatisticAction("FreeFactoryForAddon" + Consts.BuildItemOnBuildingPostfix, -1));
+				item.ProducedActions.Add(new ChangeStatisticAction("FreeFactoryForAddon", 1));
+
 				return item;
 			}
 		}
@@ -1297,7 +1326,7 @@ namespace SC2.UnitTests.TestData.LOTV
 				};
 
 				refinery.OrderRequirements.Add(new ItemExistsOrOnBuildingRequirement(Consts.CoreStatistics.GasGayser));
-				refinery.ProduceRequirements.Add(new StatBiggerOrEqualThenValueRequirement(Consts.CoreStatistics.GasGayser, 1));
+				refinery.ProduceRequirements.Add(new ItemExistsOrOnBuildingRequirement(Consts.CoreStatistics.GasGayser));
 
 				refinery.OrderedActions.Add(new ChangeStatisticAction(Consts.CoreStatistics.GasGayser, -1));
 				refinery.OrderedActions.Add(new ChangeStatisticAction(Consts.CoreStatistics.WorkersOnMinerals, -1));
@@ -1389,6 +1418,11 @@ namespace SC2.UnitTests.TestData.LOTV
 				item.ProducedActions.Add(new ChangeStatisticAction(Consts.CoreStatistics.WorkersOnMinerals, 1));
 				item.ProducedActions.Add(new ChangeStatisticAction(Consts.CoreStatistics.WorkersOnWalk, -1));
 
+				item.OrderedActions.Add(new ChangeStatisticAction("FreeStarportForAddon" + Consts.BuildItemOnBuildingPostfix, 1));
+				item.ProducedActions.Add(new ChangeStatisticAction("FreeStarportForAddon" + Consts.BuildItemOnBuildingPostfix, -1));
+				item.ProducedActions.Add(new ChangeStatisticAction("FreeStarportForAddon", 1));
+
+
 				return item;
 			}
 		}
@@ -1463,16 +1497,24 @@ namespace SC2.UnitTests.TestData.LOTV
 					ItemType = BuildItemTypeEnum.Building,
 					ProductionBuildingName = "Barracks"
 				};
+				
+				item.OrderRequirements.Add(new ItemExistsOrOnBuildingRequirement("FreeBarracksForAddon"));
+				item.ProduceRequirements.Add(new StatBiggerOrEqualThenValueRequirement("FreeBarracksForAddon", 1));
 
+				item.OrderedActions.Add(new ChangeStatisticAction("FreeBarracksForAddon", -1));
+
+				/*
 				item.OrderRequirements.Add(
 						new StatsAdditionIsBiggerThenStatsAdditionRequirement(
 								new[] { "Barracks", "Barracks" + Consts.BuildItemOnBuildingPostfix },
-								new[] { "TechLabOnBarracks", "TechLabOnBarracks" + Consts.BuildItemOnBuildingPostfix, "ReactorOnBarracks", "ReactorOnBarracks" + Consts.BuildItemOnBuildingPostfix }));
+								new[] { "TechLabOnBarracks", "TechLabOnBarracks" + Consts.BuildItemOnBuildingPostfix, "ReactorOnBarracks",
+									"ReactorOnBarracks" + Consts.BuildItemOnBuildingPostfix }));
 
 				item.ProduceRequirements.Add(
 						new StatsAdditionIsBiggerThenStatsAdditionRequirement(
 								new[] { "Barracks" },
 								new[] { "TechLabOnBarracks", "TechLabOnBarracks" + Consts.BuildItemOnBuildingPostfix, "ReactorOnBarracks", "ReactorOnBarracks" + Consts.BuildItemOnBuildingPostfix }));
+				*/
 
 				return item;
 			}
@@ -1494,6 +1536,13 @@ namespace SC2.UnitTests.TestData.LOTV
 					ProductionBuildingName = "Barracks"
 				};
 
+
+				item.OrderRequirements.Add(new ItemExistsOrOnBuildingRequirement("FreeBarracksForAddon"));
+				item.ProduceRequirements.Add(new StatBiggerOrEqualThenValueRequirement("FreeBarracksForAddon", 1));
+
+				item.OrderedActions.Add(new ChangeStatisticAction("FreeBarracksForAddon", -1));
+
+				/*
 				item.OrderRequirements.Add(
 						new StatsAdditionIsBiggerThenStatsAdditionRequirement(
 								new[] { "Barracks", "Barracks" + Consts.BuildItemOnBuildingPostfix },
@@ -1503,6 +1552,7 @@ namespace SC2.UnitTests.TestData.LOTV
 						new StatsAdditionIsBiggerThenStatsAdditionRequirement(
 								new[] { "Barracks" },
 								new[] { "TechLabOnBarracks", "TechLabOnBarracks" + Consts.BuildItemOnBuildingPostfix, "ReactorOnBarracks", "ReactorOnBarracks" + Consts.BuildItemOnBuildingPostfix }));
+				*/
 
 				return item;
 			}
@@ -1524,6 +1574,12 @@ namespace SC2.UnitTests.TestData.LOTV
 					ProductionBuildingName = "Factory"
 				};
 
+				item.OrderRequirements.Add(new ItemExistsOrOnBuildingRequirement("FreeFactoryForAddon"));
+				item.ProduceRequirements.Add(new StatBiggerOrEqualThenValueRequirement("FreeFactoryForAddon", 1));
+
+				item.OrderedActions.Add(new ChangeStatisticAction("FreeFactoryForAddon", -1));
+
+				/*
 				item.OrderRequirements.Add(
 						new StatsAdditionIsBiggerThenStatsAdditionRequirement(
 								new[] { "Factory", "Factory" + Consts.BuildItemOnBuildingPostfix },
@@ -1535,6 +1591,7 @@ namespace SC2.UnitTests.TestData.LOTV
 								new[] { "Factory" },
 								new[] { "TechLabOnFactory", "TechLabOnFactory" + Consts.BuildItemOnBuildingPostfix, 
                             "ReactorOnFactory", "ReactorOnFactory" + Consts.BuildItemOnBuildingPostfix }));
+				*/
 
 				return item;
 			}
@@ -1556,6 +1613,12 @@ namespace SC2.UnitTests.TestData.LOTV
 					ProductionBuildingName = "Factory"
 				};
 
+				item.OrderRequirements.Add(new ItemExistsOrOnBuildingRequirement("FreeFactoryForAddon"));
+				item.ProduceRequirements.Add(new StatBiggerOrEqualThenValueRequirement("FreeFactoryForAddon", 1));
+
+				item.OrderedActions.Add(new ChangeStatisticAction("FreeFactoryForAddon", -1));
+
+				/*
 				item.OrderRequirements.Add(
 						new StatsAdditionIsBiggerThenStatsAdditionRequirement(
 								new[] { "Factory", "Factory" + Consts.BuildItemOnBuildingPostfix },
@@ -1567,6 +1630,7 @@ namespace SC2.UnitTests.TestData.LOTV
 								new[] { "Factory" },
 								new[] { "TechLabOnFactory", "TechLabOnFactory" + Consts.BuildItemOnBuildingPostfix, 
                             "ReactorOnFactory", "ReactorOnFactory" + Consts.BuildItemOnBuildingPostfix }));
+				*/
 
 				return item;
 			}
@@ -1588,6 +1652,12 @@ namespace SC2.UnitTests.TestData.LOTV
 					ProductionBuildingName = "Starport"
 				};
 
+				item.OrderRequirements.Add(new ItemExistsOrOnBuildingRequirement("FreeStarportForAddon"));
+				item.ProduceRequirements.Add(new StatBiggerOrEqualThenValueRequirement("FreeStarportForAddon", 1));
+
+				item.OrderedActions.Add(new ChangeStatisticAction("FreeStarportForAddon", -1));
+
+				/*
 				item.OrderRequirements.Add(
 						new StatsAdditionIsBiggerThenStatsAdditionRequirement(
 								new[] { "Starport", "Starport" + Consts.BuildItemOnBuildingPostfix },
@@ -1599,6 +1669,7 @@ namespace SC2.UnitTests.TestData.LOTV
 								new[] { "Starport" },
 								new[] { "TechLabOnStarport", "TechLabOnStarport" + Consts.BuildItemOnBuildingPostfix,
                         "ReactorOnStarport", "ReactorOnStarport" + Consts.BuildItemOnBuildingPostfix}));
+				*/
 
 				return item;
 			}
@@ -1620,6 +1691,12 @@ namespace SC2.UnitTests.TestData.LOTV
 					ProductionBuildingName = "Starport"
 				};
 
+				item.OrderRequirements.Add(new ItemExistsOrOnBuildingRequirement("FreeStarportForAddon"));
+				item.ProduceRequirements.Add(new StatBiggerOrEqualThenValueRequirement("FreeStarportForAddon", 1));
+
+				item.OrderedActions.Add(new ChangeStatisticAction("FreeStarportForAddon", -1));
+
+				/*
 				item.OrderRequirements.Add(
 						new StatsAdditionIsBiggerThenStatsAdditionRequirement(
 								new[] { "Starport", "Starport" + Consts.BuildItemOnBuildingPostfix },
@@ -1631,6 +1708,7 @@ namespace SC2.UnitTests.TestData.LOTV
 								new[] { "Starport" },
 								new[] { "TechLabOnStarport", "TechLabOnStarport" + Consts.BuildItemOnBuildingPostfix,
                         "ReactorOnStarport", "ReactorOnStarport" + Consts.BuildItemOnBuildingPostfix}));
+				*/
 
 				return item;
 			}
@@ -1881,6 +1959,115 @@ namespace SC2.UnitTests.TestData.LOTV
 			}
 		}
 
+		private static BuildItemEntity StartIdle
+		{
+			get
+			{
+				var item = new BuildItemEntity
+				{
+					Name = "StartIdle",
+					ItemType = BuildItemTypeEnum.Special,
+					DisplayName = "Start Idle",
+					BuildTimeInSeconds = 1
+				};
+
+				item.OrderRequirements.Add(new StatLessThenValueRequirement(IdleModule.StartIdle, 1));
+
+				item.OrderedActions.Add(new ChangeStatisticAction(IdleModule.StartIdle, 1));
+
+				return item;
+			}
+		}
+
+		private static BuildItemEntity StopIdleIn1Second
+		{
+			get
+			{
+				var item = new BuildItemEntity
+				{
+					Name = "StopIdleIn1Second",
+					ItemType = BuildItemTypeEnum.Special,
+					DisplayName = "Stop Idle in 1 second",
+					BuildTimeInSeconds = 1
+				};
+
+				item.OrderRequirements.Add(new ItemExistsOrOnBuildingRequirement(IdleModule.StartIdle));
+
+				item.ProduceRequirements.Add(new StatBiggerOrEqualThenValueRequirement(IdleModule.IdleTimer, 1));
+
+				item.OrderedActions.Add(new ChangeStatisticAction(IdleModule.StartIdle, -1));
+
+				return item;
+			}
+		}
+
+		private static BuildItemEntity StopIdleIn3Seconds
+		{
+			get
+			{
+				var item = new BuildItemEntity
+				{
+					Name = "StopIdleIn3Seconds",
+					ItemType = BuildItemTypeEnum.Special,
+					DisplayName = "Stop Idle in 3 seconds",
+					BuildTimeInSeconds = 1
+				};
+
+				item.OrderRequirements.Add(new ItemExistsOrOnBuildingRequirement(IdleModule.StartIdle));
+
+				item.ProduceRequirements.Add(new StatBiggerOrEqualThenValueRequirement(IdleModule.IdleTimer, 3));
+
+				item.OrderedActions.Add(new ChangeStatisticAction(IdleModule.StartIdle, -1));
+
+				return item;
+			}
+		}
+
+		private static BuildItemEntity StopIdleIn5Seconds
+		{
+			get
+			{
+				var item = new BuildItemEntity
+				{
+					Name = "StopIdleIn5Seconds",
+					ItemType = BuildItemTypeEnum.Special,
+					DisplayName = "Stop Idle in 5 seconds",
+					BuildTimeInSeconds = 1
+				};
+
+				item.OrderRequirements.Add(new ItemExistsOrOnBuildingRequirement(IdleModule.StartIdle));
+
+				item.ProduceRequirements.Add(new StatBiggerOrEqualThenValueRequirement(IdleModule.IdleTimer, 5));
+
+				item.OrderedActions.Add(new ChangeStatisticAction(IdleModule.StartIdle, -1));
+
+				return item;
+			}
+		}
+
+		private static BuildItemEntity StopIdleIn10Seconds
+		{
+			get
+			{
+				var item = new BuildItemEntity
+				{
+					Name = "StopIdleIn10Seconds",
+					ItemType = BuildItemTypeEnum.Special,
+					DisplayName = "Stop Idle in 10 seconds",
+					BuildTimeInSeconds = 1
+				};
+
+				item.OrderRequirements.Add(new ItemExistsOrOnBuildingRequirement(IdleModule.StartIdle));
+
+				item.ProduceRequirements.Add(new StatBiggerOrEqualThenValueRequirement(IdleModule.IdleTimer, 10));
+
+				item.OrderedActions.Add(new ChangeStatisticAction(IdleModule.StartIdle, -1));
+
+				return item;
+			}
+		}
+
+
 		private static BuildItemEntity LiftRaxFromTechLab
 		{
 			get
@@ -1900,6 +2087,10 @@ namespace SC2.UnitTests.TestData.LOTV
 
 				item.OrderedActions.Add(new ChangeStatisticAction("TechLabOnBarracks", -1));
 				item.OrderedActions.Add(new ChangeStatisticAction("FreeTechLab", 1));
+				item.OrderedActions.Add(new ChangeStatisticAction("FreeBarracksForAddon" + Consts.BuildItemOnBuildingPostfix, 1));
+
+				item.ProducedActions.Add(new ChangeStatisticAction("FreeBarracksForAddon", 1));
+				item.ProducedActions.Add(new ChangeStatisticAction("FreeBarracksForAddon" + Consts.BuildItemOnBuildingPostfix, -1));
 
 				return item;
 			}
@@ -1913,129 +2104,27 @@ namespace SC2.UnitTests.TestData.LOTV
 				{
 					Name = "LandRaxOnTechLab",
 					ItemType = BuildItemTypeEnum.Special,
-					BuildTimeInSeconds = 1,
+					BuildTimeInSeconds = 5,
 					ProductionBuildingName = "Barracks",
 					DisplayName = "Land Barracks on Lab"
 				};
 
-				item.OrderRequirements.Add(new StatBiggerOrEqualThenValueRequirement("FreeTechLab", 1));
+				item.OrderRequirements.Add(new ItemExistsOrOnBuildingRequirement("FreeBarracksForAddon"));
+				item.OrderRequirements.Add(new ItemExistsOrOnBuildingRequirement("FreeTechLab"));
+
+				item.ProduceRequirements.Add(new StatBiggerOrEqualThenValueRequirement("FreeBarracksForAddon", 1));
 				item.ProduceRequirements.Add(new StatBiggerOrEqualThenValueRequirement("FreeTechLab", 1));
 
-				item.OrderedActions.Add(new ChangeStatisticAction("TechLabOnBarracks", 1));
+				item.OrderedActions.Add(new ChangeStatisticAction("FreeBarracksForAddon", -1));
 				item.OrderedActions.Add(new ChangeStatisticAction("FreeTechLab", -1));
+				item.OrderedActions.Add(new ChangeStatisticAction("TechLabOnBarracks" + Consts.BuildItemOnBuildingPostfix, 1));
+
+				item.ProducedActions.Add(new ChangeStatisticAction("TechLabOnBarracks" + Consts.BuildItemOnBuildingPostfix, -1));
+				item.ProducedActions.Add(new ChangeStatisticAction("TechLabOnBarracks", 1));
 
 				return item;
 			}
 		}
-
-        private static BuildItemEntity StartIdle
-        {
-            get
-            {
-                var item = new BuildItemEntity
-                {
-                    Name = IdleModule.StartIdle,
-                    ItemType = BuildItemTypeEnum.Special,
-                    DisplayName = "Start Idle",
-                    BuildTimeInSeconds = 0
-                };
-
-                item.OrderRequirements.Add(new StatLessThenValueRequirement(IdleModule.StartIdle, 1));
-                item.OrderRequirements.Add(new StatLessThenValueRequirement(IdleModule.StartIdle + Consts.BuildItemOnBuildingPostfix, 1));
-
-                item.OrderedActions.Add(new ChangeStatisticAction(IdleModule.StartIdle, 1));
-
-                return item;
-            }
-        }
-
-		private static BuildItemEntity StopIdleIn1Second
-		{
-			get
-			{
-				var item = new BuildItemEntity
-				{
-					Name = "StopIdleIn1Second",
-					ItemType = BuildItemTypeEnum.Special,
-					DisplayName = "Stop Idle in 1 second",
-					BuildTimeInSeconds = 0
-				};
-
-				item.OrderRequirements.Add(new ItemExistsOrOnBuildingRequirement(IdleModule.StartIdle));
-				item.ProduceRequirements.Add(new StatBiggerOrEqualThenValueRequirement(IdleModule.IdleTimer, 1));
-
-				item.OrderedActions.Add(new ChangeStatisticAction(IdleModule.StartIdle, -1));
-				item.OrderedActions.Add(new ChangeStatisticAction(IdleModule.StartIdle + Consts.BuildItemOnBuildingPostfix, -1));
-
-				return item;
-			}
-		}
-
-		private static BuildItemEntity StopIdleIn3Seconds
-        {
-            get
-            {
-                var item = new BuildItemEntity
-                {
-                    Name = "StopIdleIn3Seconds",
-                    ItemType = BuildItemTypeEnum.Special,
-                    DisplayName = "Stop Idle in 3 seconds",
-                    BuildTimeInSeconds = 0
-                };
-
-                item.OrderRequirements.Add(new ItemExistsOrOnBuildingRequirement(IdleModule.StartIdle));
-                item.ProduceRequirements.Add(new StatBiggerOrEqualThenValueRequirement(IdleModule.IdleTimer, 3));
-
-                item.OrderedActions.Add(new ChangeStatisticAction(IdleModule.StartIdle, -1));
-                item.OrderedActions.Add(new ChangeStatisticAction(IdleModule.StartIdle + Consts.BuildItemOnBuildingPostfix, -1));
-                
-                return item;
-            }
-        }
-
-        private static BuildItemEntity StopIdleIn5Seconds
-        {
-            get
-            {
-                var item = new BuildItemEntity
-                {
-                    Name = "StopIdleIn5Seconds",
-                    ItemType = BuildItemTypeEnum.Special,
-                    DisplayName = "Stop Idle in 5 seconds",
-                    BuildTimeInSeconds = 0
-                };
-
-                item.OrderRequirements.Add(new ItemExistsOrOnBuildingRequirement(IdleModule.StartIdle));
-                item.ProduceRequirements.Add(new StatBiggerOrEqualThenValueRequirement(IdleModule.IdleTimer, 5));
-
-                item.OrderedActions.Add(new ChangeStatisticAction(IdleModule.StartIdle, -1));
-                item.OrderedActions.Add(new ChangeStatisticAction(IdleModule.StartIdle + Consts.BuildItemOnBuildingPostfix, -1));
-
-                return item;
-            }
-        }
-
-        private static BuildItemEntity StopIdleIn10Seconds
-        {
-            get
-            {
-                var item = new BuildItemEntity
-                {
-                    Name = "StopIdleIn10Seconds",
-                    ItemType = BuildItemTypeEnum.Special,
-                    DisplayName = "Stop Idle in 10 seconds",
-                    BuildTimeInSeconds = 0
-                };
-
-                item.OrderRequirements.Add(new ItemExistsOrOnBuildingRequirement(IdleModule.StartIdle));
-                item.ProduceRequirements.Add(new StatBiggerOrEqualThenValueRequirement(IdleModule.IdleTimer, 10));
-
-                item.OrderedActions.Add(new ChangeStatisticAction(IdleModule.StartIdle, -1));
-                item.OrderedActions.Add(new ChangeStatisticAction(IdleModule.StartIdle + Consts.BuildItemOnBuildingPostfix, -1));
-
-                return item;
-            }
-        }
 
 		private static BuildItemEntity LiftRaxFromReactor
 		{
@@ -2055,7 +2144,11 @@ namespace SC2.UnitTests.TestData.LOTV
 				item.ProduceRequirements.Add(new StatLessThenStatRequirement("ReactorOnBarracks" + Consts.BuzyBuildItemPostfix, "ReactorOnBarracks"));
 
 				item.OrderedActions.Add(new ChangeStatisticAction("ReactorOnBarracks", -1));
-				item.OrderedActions.Add(new ChangeStatisticAction("FreeReactor", 1));
+				item.OrderedActions.Add(new ChangeStatisticAction("FreeReactor", 1));				
+				item.OrderedActions.Add(new ChangeStatisticAction("FreeBarracksForAddon" + Consts.BuildItemOnBuildingPostfix, 1));
+
+				item.ProducedActions.Add(new ChangeStatisticAction("FreeBarracksForAddon", 1));
+				item.ProducedActions.Add(new ChangeStatisticAction("FreeBarracksForAddon" + Consts.BuildItemOnBuildingPostfix, -1));
 
 				return item;
 			}
@@ -2069,16 +2162,24 @@ namespace SC2.UnitTests.TestData.LOTV
 				{
 					Name = "LandRaxOnReactor",
 					ItemType = BuildItemTypeEnum.Special,
-					BuildTimeInSeconds = 1,
+					BuildTimeInSeconds = 5,
 					ProductionBuildingName = "Barracks",
 					DisplayName = "Land Barracks on Reactor"
 				};
 
-				item.OrderRequirements.Add(new StatBiggerOrEqualThenValueRequirement("FreeReactor", 1));
+				item.OrderRequirements.Add(new ItemExistsOrOnBuildingRequirement("FreeBarracksForAddon"));
+				item.OrderRequirements.Add(new ItemExistsOrOnBuildingRequirement("FreeReactor"));
+
+				item.ProduceRequirements.Add(new StatBiggerOrEqualThenValueRequirement("FreeBarracksForAddon", 1));
 				item.ProduceRequirements.Add(new StatBiggerOrEqualThenValueRequirement("FreeReactor", 1));
 
-				item.OrderedActions.Add(new ChangeStatisticAction("ReactorOnBarracks", 1));
+				item.OrderedActions.Add(new ChangeStatisticAction("FreeBarracksForAddon", 1));
 				item.OrderedActions.Add(new ChangeStatisticAction("FreeReactor", -1));
+				item.OrderedActions.Add(new ChangeStatisticAction("ReactorOnBarracks" + Consts.BuildItemOnBuildingPostfix, 1));
+
+				item.ProducedActions.Add(new ChangeStatisticAction("ReactorOnBarracks" + Consts.BuildItemOnBuildingPostfix, -1));
+				item.ProducedActions.Add(new ChangeStatisticAction("ReactorOnBarracks", 1));
+
 
 				return item;
 			}
@@ -2103,6 +2204,10 @@ namespace SC2.UnitTests.TestData.LOTV
 
 				item.OrderedActions.Add(new ChangeStatisticAction("TechLabOnFactory", -1));
 				item.OrderedActions.Add(new ChangeStatisticAction("FreeTechLab", 1));
+				item.OrderedActions.Add(new ChangeStatisticAction("FreeFactoryForAddon" + Consts.BuildItemOnBuildingPostfix, 1));
+
+				item.ProducedActions.Add(new ChangeStatisticAction("FreeFactoryForAddon", 1));
+				item.ProducedActions.Add(new ChangeStatisticAction("FreeFactoryForAddon" + Consts.BuildItemOnBuildingPostfix, -1));
 
 				return item;
 			}
@@ -2116,16 +2221,24 @@ namespace SC2.UnitTests.TestData.LOTV
 				{
 					Name = "LandFactoryOnTechLab",
 					ItemType = BuildItemTypeEnum.Special,
-					BuildTimeInSeconds = 1,
+					BuildTimeInSeconds = 5,
 					ProductionBuildingName = "Factory",
 					DisplayName = "Land Factory on Lab"
 				};
 
-				item.OrderRequirements.Add(new StatBiggerOrEqualThenValueRequirement("FreeTechLab", 1));
+				item.OrderRequirements.Add(new ItemExistsOrOnBuildingRequirement("FreeFactoryForAddon"));
+				item.OrderRequirements.Add(new ItemExistsOrOnBuildingRequirement("FreeTechLab"));
+
+				item.ProduceRequirements.Add(new StatBiggerOrEqualThenValueRequirement("FreeFactoryForAddon", 1));
 				item.ProduceRequirements.Add(new StatBiggerOrEqualThenValueRequirement("FreeTechLab", 1));
 
-				item.OrderedActions.Add(new ChangeStatisticAction("TechLabOnFactory", 1));
+				item.OrderedActions.Add(new ChangeStatisticAction("FreeFactoryForAddon", -1));
 				item.OrderedActions.Add(new ChangeStatisticAction("FreeTechLab", -1));
+				item.OrderedActions.Add(new ChangeStatisticAction("TechLabOnFactory" + Consts.BuildItemOnBuildingPostfix, 1));
+			
+
+				item.ProducedActions.Add(new ChangeStatisticAction("TechLabOnFactory" + Consts.BuildItemOnBuildingPostfix, -1));
+				item.ProducedActions.Add(new ChangeStatisticAction("TechLabOnFactory", 1));
 
 				return item;
 			}
@@ -2150,6 +2263,10 @@ namespace SC2.UnitTests.TestData.LOTV
 
 				item.OrderedActions.Add(new ChangeStatisticAction("ReactorOnFactory", -1));
 				item.OrderedActions.Add(new ChangeStatisticAction("FreeReactor", 1));
+				item.OrderedActions.Add(new ChangeStatisticAction("FreeFactoryForAddon" + Consts.BuildItemOnBuildingPostfix, 1));
+
+				item.ProducedActions.Add(new ChangeStatisticAction("FreeFactoryForAddon", 1));
+				item.ProducedActions.Add(new ChangeStatisticAction("FreeFactoryForAddon" + Consts.BuildItemOnBuildingPostfix, -1));
 
 				return item;
 			}
@@ -2163,23 +2280,30 @@ namespace SC2.UnitTests.TestData.LOTV
 				{
 					Name = "LandFactoryOnReactor",
 					ItemType = BuildItemTypeEnum.Special,
-					BuildTimeInSeconds = 1,
+					BuildTimeInSeconds = 5,
 					ProductionBuildingName = "Factory",
 					DisplayName = "Land Factory on Reactor"
 				};
 
-				item.OrderRequirements.Add(new StatBiggerOrEqualThenValueRequirement("FreeReactor", 1));
-				item.ProduceRequirements.Add(new StatBiggerOrEqualThenValueRequirement("FreeReactor", 1));
+				item.OrderRequirements.Add(new ItemExistsOrOnBuildingRequirement("FreeFactoryForAddon"));
+				item.OrderRequirements.Add(new ItemExistsOrOnBuildingRequirement("FreeReactor"));
 
-				item.OrderedActions.Add(new ChangeStatisticAction("ReactorOnFactory", 1));
+				item.ProduceRequirements.Add(new StatBiggerOrEqualThenValueRequirement("FreeFactoryForAddon", 1));
+				item.ProduceRequirements.Add(new StatBiggerOrEqualThenValueRequirement("FreeReactor", 1));
+				
 				item.OrderedActions.Add(new ChangeStatisticAction("FreeReactor", -1));
+				item.OrderedActions.Add(new ChangeStatisticAction("FreeFactoryForAddon", -1));
+				item.OrderedActions.Add(new ChangeStatisticAction("ReactorOnFactory" + Consts.BuildItemOnBuildingPostfix, 1));
+
+				item.ProducedActions.Add(new ChangeStatisticAction("ReactorOnFactory" + Consts.BuildItemOnBuildingPostfix, -1));
+				item.ProducedActions.Add(new ChangeStatisticAction("ReactorOnFactory", 1));
 
 				return item;
 			}
 		}
 
 		private static BuildItemEntity LiftStarportFromTechLab
-		{
+		{			
 			get
 			{
 				var item = new BuildItemEntity
@@ -2197,6 +2321,10 @@ namespace SC2.UnitTests.TestData.LOTV
 
 				item.OrderedActions.Add(new ChangeStatisticAction("TechLabOnStarport", -1));
 				item.OrderedActions.Add(new ChangeStatisticAction("FreeTechLab", 1));
+				item.OrderedActions.Add(new ChangeStatisticAction("FreeStarportForAddon" + Consts.BuildItemOnBuildingPostfix, 1));
+
+				item.ProducedActions.Add(new ChangeStatisticAction("FreeStarportForAddon", 1));
+				item.ProducedActions.Add(new ChangeStatisticAction("FreeStarportForAddon" + Consts.BuildItemOnBuildingPostfix, -1));
 
 				return item;
 			}
@@ -2210,16 +2338,23 @@ namespace SC2.UnitTests.TestData.LOTV
 				{
 					Name = "LandStarportOnTechLab",
 					ItemType = BuildItemTypeEnum.Special,
-					BuildTimeInSeconds = 1,
+					BuildTimeInSeconds = 5,
 					ProductionBuildingName = "Starport",
 					DisplayName = "Land Starport on Lab"
 				};
 
-				item.OrderRequirements.Add(new StatBiggerOrEqualThenValueRequirement("FreeTechLab", 1));
+				item.OrderRequirements.Add(new ItemExistsOrOnBuildingRequirement("FreeStarportForAddon"));
+				item.OrderRequirements.Add(new ItemExistsOrOnBuildingRequirement("FreeTechLab"));
+
+				item.ProduceRequirements.Add(new StatBiggerOrEqualThenValueRequirement("FreeStarportForAddon", 1));
 				item.ProduceRequirements.Add(new StatBiggerOrEqualThenValueRequirement("FreeTechLab", 1));
 
-				item.OrderedActions.Add(new ChangeStatisticAction("TechLabOnStarport", 1));
+				item.OrderedActions.Add(new ChangeStatisticAction("TechLabOnStarport" + Consts.BuildItemOnBuildingPostfix, 1));
 				item.OrderedActions.Add(new ChangeStatisticAction("FreeTechLab", -1));
+				item.OrderedActions.Add(new ChangeStatisticAction("FreeStarportForAddon", -1));
+
+				item.ProducedActions.Add(new ChangeStatisticAction("TechLabOnStarport" + Consts.BuildItemOnBuildingPostfix, -1));
+				item.ProducedActions.Add(new ChangeStatisticAction("TechLabOnStarport", 1));
 
 				return item;
 			}
@@ -2244,6 +2379,10 @@ namespace SC2.UnitTests.TestData.LOTV
 
 				item.OrderedActions.Add(new ChangeStatisticAction("ReactorOnStarport", -1));
 				item.OrderedActions.Add(new ChangeStatisticAction("FreeReactor", 1));
+				item.OrderedActions.Add(new ChangeStatisticAction("FreeStarportForAddon" + Consts.BuildItemOnBuildingPostfix, 1));
+
+				item.ProducedActions.Add(new ChangeStatisticAction("FreeStarportForAddon", 1));
+				item.ProducedActions.Add(new ChangeStatisticAction("FreeStarportForAddon" + Consts.BuildItemOnBuildingPostfix, -1));
 
 				return item;
 			}
@@ -2257,16 +2396,26 @@ namespace SC2.UnitTests.TestData.LOTV
 				{
 					Name = "LandStarportOnReactor",
 					ItemType = BuildItemTypeEnum.Special,
-					BuildTimeInSeconds = 1,
+					BuildTimeInSeconds = 5,
 					ProductionBuildingName = "Starport",
 					DisplayName = "Land Starport on Reactor"
 				};
 
+				item.OrderRequirements.Add(new ItemExistsOrOnBuildingRequirement("FreeStarportForAddon"));
+				item.OrderRequirements.Add(new ItemExistsOrOnBuildingRequirement("FreeReactor"));
+
+				item.ProduceRequirements.Add(new StatBiggerOrEqualThenValueRequirement("FreeStarportForAddon", 1));
+				item.ProduceRequirements.Add(new StatBiggerOrEqualThenValueRequirement("FreeReactor", 1));
+
 				item.OrderRequirements.Add(new StatBiggerOrEqualThenValueRequirement("FreeReactor", 1));
 				item.ProduceRequirements.Add(new StatBiggerOrEqualThenValueRequirement("FreeReactor", 1));
 
-				item.OrderedActions.Add(new ChangeStatisticAction("ReactorOnStarport", 1));
+				item.OrderedActions.Add(new ChangeStatisticAction("ReactorOnStarport" + Consts.BuildItemOnBuildingPostfix, 1));
 				item.OrderedActions.Add(new ChangeStatisticAction("FreeReactor", -1));
+				item.OrderedActions.Add(new ChangeStatisticAction("FreeStarportForAddon", -1));
+
+				item.ProducedActions.Add(new ChangeStatisticAction("ReactorOnStarport" + Consts.BuildItemOnBuildingPostfix, -1));
+				item.ProducedActions.Add(new ChangeStatisticAction("ReactorOnStarport", 1));
 
 				return item;
 			}

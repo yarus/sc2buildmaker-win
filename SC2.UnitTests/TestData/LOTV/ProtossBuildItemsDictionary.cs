@@ -188,15 +188,17 @@ namespace SC2.UnitTests.TestData.LOTV
 					CostMinerals = 100,
 					CostSupply = 2,
 					BuildTimeInSeconds = 27,
-					ProductionBuildingName = "FreeGatewayForUnit",
+					ProductionBuildingName = "Gateway",
 					ItemType = BuildItemTypeEnum.Unit
 				};
 
+				/*
                 item.OrderedActions.Add(new ChangeStatisticAction("FreeGatewayForMorph", -1));
                 item.OrderedActions.Add(new ChangeStatisticAction("FreeGatewayForMorph" + Consts.BuildItemOnBuildingPostfix, 1));
 
                 item.ProducedActions.Add(new ChangeStatisticAction("FreeGatewayForMorph" + Consts.BuildItemOnBuildingPostfix, -1));
                 item.ProducedActions.Add(new ChangeStatisticAction("FreeGatewayForMorph", 1));
+				*/
 
 				return item;
 			}
@@ -213,18 +215,20 @@ namespace SC2.UnitTests.TestData.LOTV
                     CostMinerals = 100,
                     CostSupply = 2,
                     BuildTimeInSeconds = 30,
-                    ProductionBuildingName = "FreeGatewayForUnit",
+                    ProductionBuildingName = "Gateway",
                     ItemType = BuildItemTypeEnum.Unit
                 };
 
                 item.OrderRequirements.Add(new ItemExistsOrOnBuildingRequirement("CyberneticsCore"));
                 item.ProduceRequirements.Add(new StatBiggerOrEqualThenValueRequirement("CyberneticsCore", 1));
 
+				/*
                 item.OrderedActions.Add(new ChangeStatisticAction("FreeGatewayForMorph", -1));
                 item.OrderedActions.Add(new ChangeStatisticAction("FreeGatewayForMorph" + Consts.BuildItemOnBuildingPostfix, 1));
 
                 item.ProducedActions.Add(new ChangeStatisticAction("FreeGatewayForMorph" + Consts.BuildItemOnBuildingPostfix, -1));
                 item.ProducedActions.Add(new ChangeStatisticAction("FreeGatewayForMorph", 1));
+				*/
 
                 return item;
             }
@@ -241,18 +245,20 @@ namespace SC2.UnitTests.TestData.LOTV
 					CostMinerals = 50,
 					CostSupply = 2,
 					BuildTimeInSeconds = 26,
-                    ProductionBuildingName = "FreeGatewayForUnit",
+                    ProductionBuildingName = "Gateway",
 					ItemType = BuildItemTypeEnum.Unit
 				};
 
 				item.OrderRequirements.Add(new ItemExistsOrOnBuildingRequirement("CyberneticsCore"));
 				item.ProduceRequirements.Add(new StatBiggerOrEqualThenValueRequirement("CyberneticsCore", 1));
 
+				/*
                 item.OrderedActions.Add(new ChangeStatisticAction("FreeGatewayForMorph", -1));
                 item.OrderedActions.Add(new ChangeStatisticAction("FreeGatewayForMorph" + Consts.BuildItemOnBuildingPostfix, 1));
 
                 item.ProducedActions.Add(new ChangeStatisticAction("FreeGatewayForMorph" + Consts.BuildItemOnBuildingPostfix, -1));
                 item.ProducedActions.Add(new ChangeStatisticAction("FreeGatewayForMorph", 1));
+				*/
 
 				return item;
 			}
@@ -269,18 +275,20 @@ namespace SC2.UnitTests.TestData.LOTV
 					CostMinerals = 125,
 					CostSupply = 2,
 					BuildTimeInSeconds = 30,
-                    ProductionBuildingName = "FreeGatewayForUnit",
+                    ProductionBuildingName = "Gateway",
 					ItemType = BuildItemTypeEnum.Unit
 				};
 
 				item.OrderRequirements.Add(new ItemExistsOrOnBuildingRequirement("CyberneticsCore"));
 				item.ProduceRequirements.Add(new StatBiggerOrEqualThenValueRequirement("CyberneticsCore", 1));
 
+				/*
                 item.OrderedActions.Add(new ChangeStatisticAction("FreeGatewayForMorph", -1));
                 item.OrderedActions.Add(new ChangeStatisticAction("FreeGatewayForMorph" + Consts.BuildItemOnBuildingPostfix, 1));
 
                 item.ProducedActions.Add(new ChangeStatisticAction("FreeGatewayForMorph" + Consts.BuildItemOnBuildingPostfix, -1));
                 item.ProducedActions.Add(new ChangeStatisticAction("FreeGatewayForMorph", 1));
+				*/
 
 				return item;
 			}
@@ -297,7 +305,7 @@ namespace SC2.UnitTests.TestData.LOTV
 					CostMinerals = 125,
 					CostSupply = 2,
 					BuildTimeInSeconds = 39,
-                    ProductionBuildingName = "FreeGatewayForUnit",
+                    ProductionBuildingName = "Gateway",
 					ItemType = BuildItemTypeEnum.Unit,
 					DisplayName = "Dark Templar"
 				};
@@ -305,11 +313,13 @@ namespace SC2.UnitTests.TestData.LOTV
 				item.OrderRequirements.Add(new ItemExistsOrOnBuildingRequirement("DarkShrine"));
 				item.ProduceRequirements.Add(new StatBiggerOrEqualThenValueRequirement("DarkShrine", 1));
 
+				/*
                 item.OrderedActions.Add(new ChangeStatisticAction("FreeGatewayForMorph", -1));
                 item.OrderedActions.Add(new ChangeStatisticAction("FreeGatewayForMorph" + Consts.BuildItemOnBuildingPostfix, 1));
 
                 item.ProducedActions.Add(new ChangeStatisticAction("FreeGatewayForMorph" + Consts.BuildItemOnBuildingPostfix, -1));
                 item.ProducedActions.Add(new ChangeStatisticAction("FreeGatewayForMorph", 1));
+				*/
 
 				return item;
 			}
@@ -326,7 +336,7 @@ namespace SC2.UnitTests.TestData.LOTV
 					CostMinerals = 50,
 					CostSupply = 2,
 					BuildTimeInSeconds = 39,
-                    ProductionBuildingName = "FreeGatewayForUnit",
+                    ProductionBuildingName = "Gateway",
 					ItemType = BuildItemTypeEnum.Unit,
 					DisplayName = "High Templar"
 				};
@@ -334,11 +344,13 @@ namespace SC2.UnitTests.TestData.LOTV
 				item.OrderRequirements.Add(new ItemExistsOrOnBuildingRequirement("TemplarArchives"));
 				item.ProduceRequirements.Add(new StatBiggerOrEqualThenValueRequirement("TemplarArchives", 1));
 
+				/*
                 item.OrderedActions.Add(new ChangeStatisticAction("FreeGatewayForMorph", -1));
                 item.OrderedActions.Add(new ChangeStatisticAction("FreeGatewayForMorph" + Consts.BuildItemOnBuildingPostfix, 1));
 
                 item.ProducedActions.Add(new ChangeStatisticAction("FreeGatewayForMorph" + Consts.BuildItemOnBuildingPostfix, -1));
                 item.ProducedActions.Add(new ChangeStatisticAction("FreeGatewayForMorph", 1));
+				*/
 
 				return item;
 			}
@@ -575,6 +587,7 @@ namespace SC2.UnitTests.TestData.LOTV
 			}
 		}
 
+		/*
 		private static BuildItemEntity MothershipCore
 		{
 			get
@@ -608,6 +621,7 @@ namespace SC2.UnitTests.TestData.LOTV
 				return item;
 			}
 		}
+		*/
 
 		private static BuildItemEntity ArchonFromTwoDT
 		{
@@ -697,18 +711,20 @@ namespace SC2.UnitTests.TestData.LOTV
 					CostMinerals = 100,
 					CostSupply = 2,
 					BuildTimeInSeconds = 20,
-					ProductionBuildingName = "FreeWarpgateForUnit",
+					ProductionBuildingName = "Warpgate",
 					ItemType = BuildItemTypeEnum.Unit,
 					DisplayName = "Warp in Zealot"
 				};
 
 				item.OrderedActions.Add(new ChangeStatisticAction("Zealot", 1));
 
+				/*
                 item.OrderedActions.Add(new ChangeStatisticAction("FreeWarpgateForMorph", -1));
                 item.OrderedActions.Add(new ChangeStatisticAction("FreeWarpgateForMorph" + Consts.BuildItemOnBuildingPostfix, 1));
 
                 item.ProducedActions.Add(new ChangeStatisticAction("FreeWarpgateForMorph" + Consts.BuildItemOnBuildingPostfix, -1));
                 item.ProducedActions.Add(new ChangeStatisticAction("FreeWarpgateForMorph", 1));
+				*/
 
 				return item;
 			}
@@ -725,7 +741,7 @@ namespace SC2.UnitTests.TestData.LOTV
                     CostMinerals = 100,
                     CostSupply = 2,
                     BuildTimeInSeconds = 20,
-                    ProductionBuildingName = "FreeWarpgateForUnit",
+                    ProductionBuildingName = "Warpgate",
                     ItemType = BuildItemTypeEnum.Unit,
                     DisplayName = "Warp in Adept"
                 };
@@ -735,11 +751,13 @@ namespace SC2.UnitTests.TestData.LOTV
 
                 item.OrderedActions.Add(new ChangeStatisticAction("Adept", 1));
 
+				/*
                 item.OrderedActions.Add(new ChangeStatisticAction("FreeWarpgateForMorph", -1));
                 item.OrderedActions.Add(new ChangeStatisticAction("FreeWarpgateForMorph" + Consts.BuildItemOnBuildingPostfix, 1));
 
                 item.ProducedActions.Add(new ChangeStatisticAction("FreeWarpgateForMorph" + Consts.BuildItemOnBuildingPostfix, -1));
                 item.ProducedActions.Add(new ChangeStatisticAction("FreeWarpgateForMorph", 1));
+				*/
 
                 return item;
             }
@@ -756,7 +774,7 @@ namespace SC2.UnitTests.TestData.LOTV
 					CostMinerals = 50,
 					CostSupply = 2,
 					BuildTimeInSeconds = 23,
-                    ProductionBuildingName = "FreeWarpgateForUnit",
+                    ProductionBuildingName = "Warpgate",
 					ItemType = BuildItemTypeEnum.Unit,
 					DisplayName = "Warp in Sentry"
 				};
@@ -766,11 +784,13 @@ namespace SC2.UnitTests.TestData.LOTV
 
 				item.OrderedActions.Add(new ChangeStatisticAction("Sentry", 1));
 
+				/*
                 item.OrderedActions.Add(new ChangeStatisticAction("FreeWarpgateForMorph", -1));
                 item.OrderedActions.Add(new ChangeStatisticAction("FreeWarpgateForMorph" + Consts.BuildItemOnBuildingPostfix, 1));
 
                 item.ProducedActions.Add(new ChangeStatisticAction("FreeWarpgateForMorph" + Consts.BuildItemOnBuildingPostfix, -1));
                 item.ProducedActions.Add(new ChangeStatisticAction("FreeWarpgateForMorph", 1));
+				*/
 
 				return item;
 			}
@@ -787,7 +807,7 @@ namespace SC2.UnitTests.TestData.LOTV
 					CostMinerals = 125,
 					CostSupply = 2,
 					BuildTimeInSeconds = 23,
-                    ProductionBuildingName = "FreeWarpgateForUnit",
+                    ProductionBuildingName = "Warpgate",
 					ItemType = BuildItemTypeEnum.Unit,
 					DisplayName = "Warp in Stalker"
 				};
@@ -797,11 +817,13 @@ namespace SC2.UnitTests.TestData.LOTV
 
 				item.OrderedActions.Add(new ChangeStatisticAction("Stalker", 1));
 
+				/*
                 item.OrderedActions.Add(new ChangeStatisticAction("FreeWarpgateForMorph", -1));
                 item.OrderedActions.Add(new ChangeStatisticAction("FreeWarpgateForMorph" + Consts.BuildItemOnBuildingPostfix, 1));
 
                 item.ProducedActions.Add(new ChangeStatisticAction("FreeWarpgateForMorph" + Consts.BuildItemOnBuildingPostfix, -1));
                 item.ProducedActions.Add(new ChangeStatisticAction("FreeWarpgateForMorph", 1));
+				*/
 
 				return item;
 			}
@@ -818,7 +840,7 @@ namespace SC2.UnitTests.TestData.LOTV
 					CostMinerals = 125,
 					CostSupply = 2,
 					BuildTimeInSeconds = 32,
-                    ProductionBuildingName = "FreeWarpgateForUnit",
+                    ProductionBuildingName = "Warpgate",
 					ItemType = BuildItemTypeEnum.Unit,
 					DisplayName = "Warp in Dark Templar"
 				};
@@ -828,11 +850,13 @@ namespace SC2.UnitTests.TestData.LOTV
 
 				item.OrderedActions.Add(new ChangeStatisticAction("DarkTemplar", 1));
 
+				/*
                 item.OrderedActions.Add(new ChangeStatisticAction("FreeWarpgateForMorph", -1));
                 item.OrderedActions.Add(new ChangeStatisticAction("FreeWarpgateForMorph" + Consts.BuildItemOnBuildingPostfix, 1));
 
                 item.ProducedActions.Add(new ChangeStatisticAction("FreeWarpgateForMorph" + Consts.BuildItemOnBuildingPostfix, -1));
                 item.ProducedActions.Add(new ChangeStatisticAction("FreeWarpgateForMorph", 1));
+				*/
 
 				return item;
 			}
@@ -849,7 +873,7 @@ namespace SC2.UnitTests.TestData.LOTV
 					CostMinerals = 50,
 					CostSupply = 2,
 					BuildTimeInSeconds = 32,
-                    ProductionBuildingName = "FreeWarpgateForUnit",
+                    ProductionBuildingName = "Warpgate",
 					ItemType = BuildItemTypeEnum.Unit,
 					DisplayName = "Warp in High Templar"
 				};
@@ -859,11 +883,13 @@ namespace SC2.UnitTests.TestData.LOTV
 
 				item.OrderedActions.Add(new ChangeStatisticAction("HighTemplar", 1));
 
+				/*
                 item.OrderedActions.Add(new ChangeStatisticAction("FreeWarpgateForMorph", -1));
                 item.OrderedActions.Add(new ChangeStatisticAction("FreeWarpgateForMorph" + Consts.BuildItemOnBuildingPostfix, 1));
 
                 item.ProducedActions.Add(new ChangeStatisticAction("FreeWarpgateForMorph" + Consts.BuildItemOnBuildingPostfix, -1));
                 item.ProducedActions.Add(new ChangeStatisticAction("FreeWarpgateForMorph", 1));
+				*/
 
 				return item;
 			}
@@ -965,6 +991,7 @@ namespace SC2.UnitTests.TestData.LOTV
 				item.OrderRequirements.Add(new ItemExistsOrOnBuildingRequirement("Pylon"));                
 				item.ProduceRequirements.Add(new StatBiggerOrEqualThenValueRequirement("Pylon", 1));
 
+				/*
                 item.OrderedActions.Add(new ChangeStatisticAction("FreeGatewayForUnit" + Consts.BuildItemOnBuildingPostfix, 1));
                 item.OrderedActions.Add(new ChangeStatisticAction("FreeGatewayForMorph" + Consts.BuildItemOnBuildingPostfix, 1));
 
@@ -973,6 +1000,7 @@ namespace SC2.UnitTests.TestData.LOTV
 
                 item.ProducedActions.Add(new ChangeStatisticAction("FreeGatewayForUnit", 1));
                 item.ProducedActions.Add(new ChangeStatisticAction("FreeGatewayForMorph", 1));
+				*/
 
 				return item;
 			}
@@ -2021,9 +2049,21 @@ namespace SC2.UnitTests.TestData.LOTV
 					CostSupply = 0,
 					BuildTimeInSeconds = 7,
 					ItemType = BuildItemTypeEnum.Special,
+					ProductionBuildingName="Gateway",
 					DisplayName = "Switch to Warpgate"
 				};
 
+				item.OrderRequirements.Add(new ItemExistsOrOnBuildingRequirement("WarpgateUpgrade"));
+
+				item.ProduceRequirements.Add(new StatBiggerOrEqualThenValueRequirement("WarpgateUpgrade", 1));
+
+				item.OrderedActions.Add(new ChangeStatisticAction("Warpgate" + Consts.BuildItemOnBuildingPostfix, 1));
+
+				item.ProducedActions.Add(new ChangeStatisticAction("Warpgate" + Consts.BuildItemOnBuildingPostfix, -1));
+				item.ProducedActions.Add(new ChangeStatisticAction("Warpgate", 1));
+				item.ProducedActions.Add(new ChangeStatisticAction("Gateway", -1));
+
+				/*
                 item.OrderRequirements.Add(new ItemExistsOrOnBuildingRequirement("WarpgateUpgrade"));
                 item.OrderRequirements.Add(new ItemExistsOrOnBuildingRequirement("FreeGatewayForMorph"));
 
@@ -2041,6 +2081,7 @@ namespace SC2.UnitTests.TestData.LOTV
 
                 item.ProducedActions.Add(new ChangeStatisticAction("FreeWarpgateForMorph" + Consts.BuildItemOnBuildingPostfix, -1));
                 item.ProducedActions.Add(new ChangeStatisticAction("FreeWarpgateForMorph", 1));
+				*/
 
 				return item;
 			}
@@ -2058,9 +2099,22 @@ namespace SC2.UnitTests.TestData.LOTV
 					CostSupply = 0,
 					BuildTimeInSeconds = 7,
 					ItemType = BuildItemTypeEnum.Special,
+					ProductionBuildingName="Warpgate",
 					DisplayName = "Switch to Gateway"
 				};
 
+				item.OrderRequirements.Add(new ItemExistsOrOnBuildingRequirement("WarpgateUpgrade"));
+
+				item.ProduceRequirements.Add(new StatBiggerOrEqualThenValueRequirement("WarpgateUpgrade", 1));
+
+				item.OrderedActions.Add(new ChangeStatisticAction("Gateway" + Consts.BuildItemOnBuildingPostfix, 1));
+
+				item.ProducedActions.Add(new ChangeStatisticAction("Gateway" + Consts.BuildItemOnBuildingPostfix, -1));
+				item.ProducedActions.Add(new ChangeStatisticAction("Warpgate", -1));
+				item.ProducedActions.Add(new ChangeStatisticAction("Gateway", 1));
+
+
+				/*
                 item.OrderRequirements.Add(new ItemExistsOrOnBuildingRequirement("WarpgateUpgrade"));
                 item.OrderRequirements.Add(new ItemExistsOrOnBuildingRequirement("FreeWarpgateForMorph"));
 
@@ -2078,6 +2132,7 @@ namespace SC2.UnitTests.TestData.LOTV
 
                 item.ProducedActions.Add(new ChangeStatisticAction("FreeGatewayForMorph" + Consts.BuildItemOnBuildingPostfix, -1));
                 item.ProducedActions.Add(new ChangeStatisticAction("FreeGatewayForMorph", 1));
+				*/
 
 				return item;
 			}
@@ -2187,18 +2242,17 @@ namespace SC2.UnitTests.TestData.LOTV
             {
                 var item = new BuildItemEntity
                 {
-                    Name = IdleModule.StartIdle,
+                    Name = "StartIdle",
                     ItemType = BuildItemTypeEnum.Special,
                     DisplayName = "Start Idle",
-                    BuildTimeInSeconds = 0
+                    BuildTimeInSeconds = 1
                 };
 
                 item.OrderRequirements.Add(new StatLessThenValueRequirement(IdleModule.StartIdle, 1));
-                item.OrderRequirements.Add(new StatLessThenValueRequirement(IdleModule.StartIdle + Consts.BuildItemOnBuildingPostfix, 1));
-
+				
                 item.OrderedActions.Add(new ChangeStatisticAction(IdleModule.StartIdle, 1));
 
-                return item;
+				return item;
             }
         }
 
@@ -2211,14 +2265,14 @@ namespace SC2.UnitTests.TestData.LOTV
 					Name = "StopIdleIn1Second",
 					ItemType = BuildItemTypeEnum.Special,
 					DisplayName = "Stop Idle in 1 second",
-					BuildTimeInSeconds = 0
+					BuildTimeInSeconds = 1
 				};
 
 				item.OrderRequirements.Add(new ItemExistsOrOnBuildingRequirement(IdleModule.StartIdle));
+
 				item.ProduceRequirements.Add(new StatBiggerOrEqualThenValueRequirement(IdleModule.IdleTimer, 1));
 
 				item.OrderedActions.Add(new ChangeStatisticAction(IdleModule.StartIdle, -1));
-				item.OrderedActions.Add(new ChangeStatisticAction(IdleModule.StartIdle + Consts.BuildItemOnBuildingPostfix, -1));
 
 				return item;
 			}
@@ -2233,16 +2287,16 @@ namespace SC2.UnitTests.TestData.LOTV
                     Name = "StopIdleIn3Seconds",
                     ItemType = BuildItemTypeEnum.Special,
                     DisplayName = "Stop Idle in 3 seconds",
-                    BuildTimeInSeconds = 0
+                    BuildTimeInSeconds = 1
                 };
 
-                item.OrderRequirements.Add(new ItemExistsOrOnBuildingRequirement(IdleModule.StartIdle));
-                item.ProduceRequirements.Add(new StatBiggerOrEqualThenValueRequirement(IdleModule.IdleTimer, 3));
+				item.OrderRequirements.Add(new ItemExistsOrOnBuildingRequirement(IdleModule.StartIdle));
 
-                item.OrderedActions.Add(new ChangeStatisticAction(IdleModule.StartIdle, -1));
-                item.OrderedActions.Add(new ChangeStatisticAction(IdleModule.StartIdle + Consts.BuildItemOnBuildingPostfix, -1));
+				item.ProduceRequirements.Add(new StatBiggerOrEqualThenValueRequirement(IdleModule.IdleTimer, 3));
 
-                return item;
+				item.OrderedActions.Add(new ChangeStatisticAction(IdleModule.StartIdle, -1));
+
+				return item;
             }
         }
 
@@ -2255,16 +2309,16 @@ namespace SC2.UnitTests.TestData.LOTV
                     Name = "StopIdleIn5Seconds",
                     ItemType = BuildItemTypeEnum.Special,
                     DisplayName = "Stop Idle in 5 seconds",
-                    BuildTimeInSeconds = 0
+                    BuildTimeInSeconds = 1
                 };
 
-                item.OrderRequirements.Add(new ItemExistsOrOnBuildingRequirement(IdleModule.StartIdle));
-                item.ProduceRequirements.Add(new StatBiggerOrEqualThenValueRequirement(IdleModule.IdleTimer, 5));
+				item.OrderRequirements.Add(new ItemExistsOrOnBuildingRequirement(IdleModule.StartIdle));
 
-                item.OrderedActions.Add(new ChangeStatisticAction(IdleModule.StartIdle, -1));
-                item.OrderedActions.Add(new ChangeStatisticAction(IdleModule.StartIdle + Consts.BuildItemOnBuildingPostfix, -1));
+				item.ProduceRequirements.Add(new StatBiggerOrEqualThenValueRequirement(IdleModule.IdleTimer, 5));
 
-                return item;
+				item.OrderedActions.Add(new ChangeStatisticAction(IdleModule.StartIdle, -1));
+
+				return item;
             }
         }
 
@@ -2277,16 +2331,16 @@ namespace SC2.UnitTests.TestData.LOTV
                     Name = "StopIdleIn10Seconds",
                     ItemType = BuildItemTypeEnum.Special,
                     DisplayName = "Stop Idle in 10 seconds",
-                    BuildTimeInSeconds = 0
+                    BuildTimeInSeconds = 1
                 };
 
-                item.OrderRequirements.Add(new ItemExistsOrOnBuildingRequirement(IdleModule.StartIdle));
-                item.ProduceRequirements.Add(new StatBiggerOrEqualThenValueRequirement(IdleModule.IdleTimer, 10));
+				item.OrderRequirements.Add(new ItemExistsOrOnBuildingRequirement(IdleModule.StartIdle));
+
+				item.ProduceRequirements.Add(new StatBiggerOrEqualThenValueRequirement(IdleModule.IdleTimer, 10));
 
                 item.OrderedActions.Add(new ChangeStatisticAction(IdleModule.StartIdle, -1));
-                item.OrderedActions.Add(new ChangeStatisticAction(IdleModule.StartIdle + Consts.BuildItemOnBuildingPostfix, -1));
 
-                return item;
+				return item;
             }
         }
 

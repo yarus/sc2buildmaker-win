@@ -42,7 +42,8 @@ namespace SC2.UnitTests.TestData.HOTS
             result.AddItem(SalvageBunker);
 
             result.AddItem(StartIdle);
-            result.AddItem(StopIdleIn3Seconds);
+			result.AddItem(StopIdleIn1Second);
+			result.AddItem(StopIdleIn3Seconds);
             result.AddItem(StopIdleIn5Seconds);
             result.AddItem(StopIdleIn10Seconds);
 
@@ -1800,92 +1801,114 @@ namespace SC2.UnitTests.TestData.HOTS
 			}
 		}
 
-        private static BuildItemEntity StartIdle
-        {
-            get
-            {
-                var item = new BuildItemEntity
-                {
-                    Name = IdleModule.StartIdle,
-                    ItemType = BuildItemTypeEnum.Special,
-                    DisplayName = "Start Idle",
-                    BuildTimeInSeconds = 0
-                };
 
-                item.OrderRequirements.Add(new StatLessThenValueRequirement(IdleModule.StartIdle, 1));
-                item.OrderRequirements.Add(new StatLessThenValueRequirement(IdleModule.StartIdle + Consts.BuildItemOnBuildingPostfix, 1));
+		private static BuildItemEntity StartIdle
+		{
+			get
+			{
+				var item = new BuildItemEntity
+				{
+					Name = "StartIdle",
+					ItemType = BuildItemTypeEnum.Special,
+					DisplayName = "Start Idle",
+					BuildTimeInSeconds = 1
+				};
 
-                item.OrderedActions.Add(new ChangeStatisticAction(IdleModule.StartIdle, 1));
+				item.OrderRequirements.Add(new StatLessThenValueRequirement(IdleModule.StartIdle, 1));
 
-                return item;
-            }
-        }
+				item.OrderedActions.Add(new ChangeStatisticAction(IdleModule.StartIdle, 1));
 
-        private static BuildItemEntity StopIdleIn3Seconds
-        {
-            get
-            {
-                var item = new BuildItemEntity
-                {
-                    Name = "StopIdleIn3Seconds",
-                    ItemType = BuildItemTypeEnum.Special,
-                    DisplayName = "Stop Idle in 3 seconds",
-                    BuildTimeInSeconds = 0
-                };
+				return item;
+			}
+		}
 
-                item.OrderRequirements.Add(new ItemExistsOrOnBuildingRequirement(IdleModule.StartIdle));
-                item.ProduceRequirements.Add(new StatBiggerOrEqualThenValueRequirement(IdleModule.IdleTimer, 3));
+		private static BuildItemEntity StopIdleIn1Second
+		{
+			get
+			{
+				var item = new BuildItemEntity
+				{
+					Name = "StopIdleIn1Second",
+					ItemType = BuildItemTypeEnum.Special,
+					DisplayName = "Stop Idle in 1 second",
+					BuildTimeInSeconds = 1
+				};
 
-                item.OrderedActions.Add(new ChangeStatisticAction(IdleModule.StartIdle, -1));
-                item.OrderedActions.Add(new ChangeStatisticAction(IdleModule.StartIdle + Consts.BuildItemOnBuildingPostfix, -1));
-                
-                return item;
-            }
-        }
+				item.OrderRequirements.Add(new ItemExistsOrOnBuildingRequirement(IdleModule.StartIdle));
 
-        private static BuildItemEntity StopIdleIn5Seconds
-        {
-            get
-            {
-                var item = new BuildItemEntity
-                {
-                    Name = "StopIdleIn5Seconds",
-                    ItemType = BuildItemTypeEnum.Special,
-                    DisplayName = "Stop Idle in 5 seconds",
-                    BuildTimeInSeconds = 0
-                };
+				item.ProduceRequirements.Add(new StatBiggerOrEqualThenValueRequirement(IdleModule.IdleTimer, 1));
 
-                item.OrderRequirements.Add(new ItemExistsOrOnBuildingRequirement(IdleModule.StartIdle));
-                item.ProduceRequirements.Add(new StatBiggerOrEqualThenValueRequirement(IdleModule.IdleTimer, 5));
+				item.OrderedActions.Add(new ChangeStatisticAction(IdleModule.StartIdle, -1));
 
-                item.OrderedActions.Add(new ChangeStatisticAction(IdleModule.StartIdle, -1));
-                item.OrderedActions.Add(new ChangeStatisticAction(IdleModule.StartIdle + Consts.BuildItemOnBuildingPostfix, -1));
+				return item;
+			}
+		}
 
-                return item;
-            }
-        }
+		private static BuildItemEntity StopIdleIn3Seconds
+		{
+			get
+			{
+				var item = new BuildItemEntity
+				{
+					Name = "StopIdleIn3Seconds",
+					ItemType = BuildItemTypeEnum.Special,
+					DisplayName = "Stop Idle in 3 seconds",
+					BuildTimeInSeconds = 1
+				};
 
-        private static BuildItemEntity StopIdleIn10Seconds
-        {
-            get
-            {
-                var item = new BuildItemEntity
-                {
-                    Name = "StopIdleIn10Seconds",
-                    ItemType = BuildItemTypeEnum.Special,
-                    DisplayName = "Stop Idle in 10 seconds",
-                    BuildTimeInSeconds = 0
-                };
+				item.OrderRequirements.Add(new ItemExistsOrOnBuildingRequirement(IdleModule.StartIdle));
 
-                item.OrderRequirements.Add(new ItemExistsOrOnBuildingRequirement(IdleModule.StartIdle));
-                item.ProduceRequirements.Add(new StatBiggerOrEqualThenValueRequirement(IdleModule.IdleTimer, 10));
+				item.ProduceRequirements.Add(new StatBiggerOrEqualThenValueRequirement(IdleModule.IdleTimer, 3));
 
-                item.OrderedActions.Add(new ChangeStatisticAction(IdleModule.StartIdle, -1));
-                item.OrderedActions.Add(new ChangeStatisticAction(IdleModule.StartIdle + Consts.BuildItemOnBuildingPostfix, -1));
+				item.OrderedActions.Add(new ChangeStatisticAction(IdleModule.StartIdle, -1));
 
-                return item;
-            }
-        }
+				return item;
+			}
+		}
+
+		private static BuildItemEntity StopIdleIn5Seconds
+		{
+			get
+			{
+				var item = new BuildItemEntity
+				{
+					Name = "StopIdleIn5Seconds",
+					ItemType = BuildItemTypeEnum.Special,
+					DisplayName = "Stop Idle in 5 seconds",
+					BuildTimeInSeconds = 1
+				};
+
+				item.OrderRequirements.Add(new ItemExistsOrOnBuildingRequirement(IdleModule.StartIdle));
+
+				item.ProduceRequirements.Add(new StatBiggerOrEqualThenValueRequirement(IdleModule.IdleTimer, 5));
+
+				item.OrderedActions.Add(new ChangeStatisticAction(IdleModule.StartIdle, -1));
+
+				return item;
+			}
+		}
+
+		private static BuildItemEntity StopIdleIn10Seconds
+		{
+			get
+			{
+				var item = new BuildItemEntity
+				{
+					Name = "StopIdleIn10Seconds",
+					ItemType = BuildItemTypeEnum.Special,
+					DisplayName = "Stop Idle in 10 seconds",
+					BuildTimeInSeconds = 1
+				};
+
+				item.OrderRequirements.Add(new ItemExistsOrOnBuildingRequirement(IdleModule.StartIdle));
+
+				item.ProduceRequirements.Add(new StatBiggerOrEqualThenValueRequirement(IdleModule.IdleTimer, 10));
+
+				item.OrderedActions.Add(new ChangeStatisticAction(IdleModule.StartIdle, -1));
+
+				return item;
+			}
+		}
 
 		private static BuildItemEntity LiftRaxFromReactor
 		{

@@ -40,11 +40,11 @@ namespace SC2.Win.UI
             // Generate Test version file
             var versionsManager = dataManagerConfigurator.GetSC2VersionsManager();
 
-            //var version2 = versionsManager.GetVersion("2.0.5", "WOL");
-            //versionsManager.SaveVersion(version2);
+            var version2 = versionsManager.GetVersion("2.0.5");
+            versionsManager.SaveVersion(version2);
 
-            //var version = versionsManager.GetVersion("2.2.0", "HOTS");
-            //versionsManager.SaveVersion(version);
+            var version = versionsManager.GetVersion("2.2.0");
+            versionsManager.SaveVersion(version);
 
             var version3 = versionsManager.GetVersion("5.0.3");
             versionsManager.SaveVersion(version3);
