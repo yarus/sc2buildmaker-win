@@ -284,6 +284,7 @@ namespace SC2.Entities.BuildOrderProcessor.Modules
         private string GetFirstNormalProdBuilding(BuildItemStatistics stats, BuildItemEntity item)
         {
             var totalBuzyProdBuilding = stats.GetStatValueByName(item.ProductionBuildingName + Consts.BuzyBuildItemPostfix);
+            var buzyChronoedProdBuildings = stats.GetStatsWithKeyContains("ChronoBuzy" + item.ProductionBuildingName);
             var buzyNormalProdBuildings = stats.GetStatsWithKeyContains("NormalBuzy" + item.ProductionBuildingName);
             var buzyProdNames = buzyNormalProdBuildings.Select(p => p.Key).ToList();
 
@@ -291,7 +292,7 @@ namespace SC2.Entities.BuildOrderProcessor.Modules
             {
                 for (int i = 1; i <= totalBuzyProdBuilding; i++)
                 {
-                    string tmpBuildingName = item.ProductionBuildingName + i;
+                    string tmpBuildingName = item.ProductionBuildingName + (buzyChronoedProdBuildings.Count + i);
                     if (!buzyProdNames.Contains(tmpBuildingName))
                     {
                         return tmpBuildingName;
