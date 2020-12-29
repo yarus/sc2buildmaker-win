@@ -66,7 +66,7 @@ namespace SC2.UnitTests.TestData.LOTV
 
             result.AddItem(SiegeTank);
             result.AddItem(Cyclone);
-            result.AddItem(CycloneOnReactor);
+            // result.AddItem(CycloneOnReactor);
             result.AddItem(Thor);
             
             result.AddItem(Viking);
@@ -431,7 +431,14 @@ namespace SC2.UnitTests.TestData.LOTV
                     DisplayName = "Cyclone"
                 };
 
-                return item;
+				item.OrderRequirements.Add(new ItemExistsOrOnBuildingRequirement("TechLabOnFactory"));
+				item.ProduceRequirements.Add(new StatBiggerOrEqualThenValueRequirement("TechLabOnFactory", 1));
+				item.ProduceRequirements.Add(new StatLessThenStatRequirement("TechLabOnFactoryInUseForUnit", "TechLabOnFactory"));
+
+				item.OrderedActions.Add(new ChangeStatisticAction("TechLabOnFactoryInUseForUnit", 1));
+				item.ProducedActions.Add(new ChangeStatisticAction("TechLabOnFactoryInUseForUnit", -1));
+
+				return item;
             }
         }
 
